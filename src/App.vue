@@ -1,85 +1,70 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
+    <RouterLink to="/" class="logo" href="">Фильмотека</RouterLink>
+    <nav>
+      <RouterLink to="/">Главная</RouterLink>
+      <RouterLink to="/about">Список просмотренного</RouterLink>
+    </nav>
   </header>
-
   <RouterView />
+  <footer>
+    <section class="links">
+      <a href="#"><img src="https://placehold.it/48x48" alt=""></a>
+      <a href="#"><img src="https://placehold.it/48x48" alt=""></a>
+      <a href="#"><img src="https://placehold.it/48x48" alt=""></a>
+    </section>
+    <p>©️ 2024, Иван Смирнов</p>
+  </footer>
 </template>
 
 <style scoped>
 header {
-  line-height: 1.5;
-  max-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 150px;
+  background: var(--primary);
+  padding: 2rem;
 }
-
+a {
+  color: var(--light-text);
+  font-size: 1.75rem;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
 .logo {
-  display: block;
-  margin: 0 auto 2rem;
+  font-size: 54px;
 }
-
+.logo:hover {
+  text-decoration: none;
+}
 nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
+  display: flex;
+  gap: 64px;
 }
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 270px;
+  background: var(--primary);
+  padding: 2rem;
 }
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
+footer p {
+  font-size: 1.5rem;
+  color: var(--light-text);
 }
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+.links {
+  display: flex;
+  gap: 32px;
 }
 </style>
