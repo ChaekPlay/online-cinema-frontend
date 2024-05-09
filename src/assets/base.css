@@ -5,10 +5,12 @@
   --background: #f4fff8;
   --accent: #fb6107;
   --text: #262626;
+  --container-text: #49454f;
   --light-text: #fff;
   --positive-review: #daf1dc;
   --neutral-review: #e6e6e6;
   --negative-review: #f5d6d6;
+  --outline:#cbcfc4;
 }
 
 :root {

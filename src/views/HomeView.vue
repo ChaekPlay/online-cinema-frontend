@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <main>
+  <main class="view">
     <div class="search-bar">
       <input type="text" name="query" id="query" placeholder="Например, Гарри Поттер">
       <input type="submit" name="find" id="find" value="Найти">
@@ -13,7 +13,6 @@
   main {
     display: grid;
     place-items: center;
-    min-height: 75vh;
   }
   .search-bar {
     display: flex;
