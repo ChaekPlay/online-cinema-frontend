@@ -6,8 +6,8 @@ import { RouterLink, RouterView } from 'vue-router'
   <header>
     <RouterLink to="/" class="logo" href="">Фильмотека</RouterLink>
     <nav>
-      <RouterLink to="/">Главная</RouterLink>
-      <RouterLink to="/about">Список просмотренного</RouterLink>
+      <RouterLink to="/" class="headline-md">Главная</RouterLink>
+      <RouterLink to="/about" class="headline-md">Список просмотренного</RouterLink>
     </nav>
   </header>
   <RouterView />
@@ -32,7 +32,6 @@ header {
 }
 a {
   color: var(--light-text);
-  font-size: 1.75rem;
   text-decoration: none;
 }
 a:hover {
