@@ -36,3 +36,10 @@
   align-items: center;
   gap: 1rem;
 }
+.link {
+  text-decoration: none;
+  cursor: pointer;
+}
+.link:hover {
+  text-decoration: underline;
+}

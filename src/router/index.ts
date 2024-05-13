@@ -20,7 +20,7 @@ const router = createRouter({
     {
       path: '/search',
       name: 'search',
-      component: () => import('../pages/watched_movies/WatchedMoviesView.vue')
+      component: () => import('../pages/ratings_and_reviews/RatingsAndReviewsView.vue')
     },
     {
       path: '/watched-movies',
