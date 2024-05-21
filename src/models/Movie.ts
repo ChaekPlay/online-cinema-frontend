@@ -3,14 +3,16 @@ export default class MovieInfo {
   description!: string
   posterURI?: string
   actors!: string[]
-  filmedBy!: string
+  director!: string
   rating!: number
-  constructor({ title, description, actors, posterURI, filmedBy, rating }: MovieInfo) {
+  year!: number
+  constructor({ title, description, actors, posterURI, director, rating, year }: MovieInfo) {
     this.title = title
     this.description = description
     this.posterURI = posterURI
     this.actors = actors
-    this.filmedBy = filmedBy
+    this.director = director
     this.rating = rating
+    this.year = year
   }
 }
