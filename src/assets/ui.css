@@ -2,3 +2,7 @@
 @import './ui/colors.css';
 @import './ui/font-sizes.css';
 @import './ui/icons.css';
+
+.font-family-override {
+  font-family: 'Roboto', sans-serif;
+}
