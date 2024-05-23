@@ -1,6 +1,6 @@
 <template>
     <section class="search-results view">
-        <h1>Результаты поиска</h1>
+        <h1 class="display-lg">Результаты поиска</h1>
         <div class="search-grid">
             <SearchResultComponent :content="exampleSearchResult" />
             <SearchResultComponent :content="exampleSearchResult" />
@@ -34,8 +34,6 @@ const exampleSearchResult = new SearchResult({
 }
 
 .search-results h1 {
-    font-size: 4rem;
-    /* TODO: change to style */
     margin-bottom: 2rem;
 }
 
