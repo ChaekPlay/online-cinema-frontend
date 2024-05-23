@@ -13,9 +13,9 @@ import { RouterLink, RouterView } from 'vue-router'
   <RouterView />
   <footer>
     <section class="links">
-      <a href="#"><img src="https://placehold.it/48x48" alt=""></a>
-      <a href="#"><img src="https://placehold.it/48x48" alt=""></a>
-      <a href="#"><img src="https://placehold.it/48x48" alt=""></a>
+      <a href="https://vk.com/chaekplay"><img src="@/static/icons/vk.svg" alt="vk"></a>
+      <a href="https://t.me/icy0o"><img src="@/static/icons/telegram.svg" alt="telegram"></a>
+      <a href="https://github.com/ChaekPlay"><img src="@/static/icons/github.svg" alt="gihub"></a>
     </section>
     <p>©️ 2024, Иван Смирнов</p>
   </footer>
