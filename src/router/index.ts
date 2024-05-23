@@ -20,7 +20,7 @@ const router = createRouter({
     {
       path: '/search',
       name: 'search',
-      component: () => import('..\\pages\\ratings_and_reviews\\RatingsAndReviewsView.vue')
+      component: () => import('../pages/search_results/SearchResultsView.vue')
     },
     {
       path: '/watched-movies',
@@ -51,6 +51,16 @@ const router = createRouter({
       path: '/movie/:id/create-review',
       name: 'create-review',
       component: () => import('../pages/review_creation/ReviewCreationView.vue')
+    },
+    {
+      path: '/movie/:id/review-success',
+      name: 'review-success',
+      component: () => import('../pages/review_success/ReviewSuccessView.vue')
+    },
+    {
+      path: '/actor/:id',
+      name: 'actor-info',
+      component: () => import('../pages/actor_info/ActorInfoView.vue')
     }
   ]
 })

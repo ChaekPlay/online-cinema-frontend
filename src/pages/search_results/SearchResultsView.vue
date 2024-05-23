@@ -2,14 +2,14 @@
     <section class="search-results view">
         <h1 class="display-lg">Результаты поиска</h1>
         <div class="search-grid">
-            <SearchResultComponent :content="exampleSearchResult" />
-            <SearchResultComponent :content="exampleSearchResult" />
-            <SearchResultComponent :content="exampleSearchResult" />
-            <SearchResultComponent :content="exampleSearchResult" />
-            <SearchResultComponent :content="exampleSearchResult" />
-            <SearchResultComponent :content="exampleSearchResult" />
-            <SearchResultComponent :content="exampleSearchResult" />
-            <SearchResultComponent :content="exampleSearchResult" />
+            <SearchResultComponent :content="exampleSearchResult" @click="$router.push('/movie/'+exampleSearchResult.id)"/>
+            <SearchResultComponent :content="exampleSearchResult" @click="$router.push('/movie/'+exampleSearchResult.id)"/>
+            <SearchResultComponent :content="exampleSearchResult" @click="$router.push('/movie/'+exampleSearchResult.id)"/>
+            <SearchResultComponent :content="exampleSearchResult" @click="$router.push('/movie/'+exampleSearchResult.id)"/>
+            <SearchResultComponent :content="exampleSearchResult" @click="$router.push('/movie/'+exampleSearchResult.id)"/>
+            <SearchResultComponent :content="exampleSearchResult" @click="$router.push('/movie/'+exampleSearchResult.id)"/>
+            <SearchResultComponent :content="exampleSearchResult" @click="$router.push('/movie/'+exampleSearchResult.id)"/>
+            <SearchResultComponent :content="exampleSearchResult" @click="$router.push('/movie/'+exampleSearchResult.id)"/>
         </div>
     </section>
 </template>

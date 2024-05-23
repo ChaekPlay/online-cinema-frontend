@@ -21,19 +21,22 @@ defineProps({
     align-items: center;
     gap: 1rem;
     background: var(--primary-container-high);
-    padding: 1rem 2rem 1rem 1rem;
     border-radius: 1rem;
+    overflow: hidden;
 }
 
 .watched-card .poster {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 100%;
     object-fit: contain;
     border-radius: 0.75rem;
 }
 .card-info {
     display: flex;
-    align-items:baseline;
+    flex-direction: column;
     gap: 1rem;
+}
+span {
+    padding: 3rem;
 }
 </style>

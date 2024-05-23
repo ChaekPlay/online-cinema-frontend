@@ -1,7 +1,7 @@
 <template>
     <div class="review-creation view">
         <h1>Создание рецензии</h1>
-        <form @submit.prevent="">
+        <form @submit.prevent="sendReview">
             <div class="review-type">
                 <p class="review-type-text title-lg">Тип рецензии</p>
                 <div class="review-type-radio">
@@ -26,7 +26,7 @@
                     placeholder="Введите текст рецензии"></textarea>
             </div>
             <div class="action-bar">
-                <button class="btn btn-glass" @click.prevent="">Назад</button>
+                <button class="btn btn-glass" @click.prevent="$router.back()">Назад</button>
                 <button class="btn btn-primary" type="submit">Отправить</button>
             </div>
         </form>
@@ -36,11 +36,15 @@
 import { ReviewType } from '@/models/ReviewType';
 import InputField from './components/InputField.vue';
 import RadioToggle from './components/RadioToggle.vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 
 function sendReview() {
     // post query
     // if query is successful
     // go to review success page
+    router.push('review-success');
 }
 </script>
 <style scoped>

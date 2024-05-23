@@ -2,7 +2,7 @@
     <div class="ratings-and-reviews view">
         <div class="ratings-and-reviews-header">
             <h2 class="display-lg">Оценки и отзывы</h2>
-            <a @click.prevent="" class="title-md back-text link">Вернуться к фильму</a>
+            <a @click.prevent="" class="title-md back-text link" @click="$router.back()">Вернуться к фильму</a>
         </div>
         <div class="rating">
             <div class="user-rating">
@@ -37,7 +37,7 @@
         <div class="reviews">
             <div class="review-header">
                 <h3 class="headline-md">Рецензии</h3>
-                <button class="btn btn-glass btn-icon-text label-lg"><img class="icon-sm" src="@/static/icons/plus.svg">Написать свою рецензию</button>
+                <button class="btn btn-glass btn-icon-text label-lg" @click="$router.push('create-review')"><img class="icon-sm" src="@/static/icons/plus.svg">Написать свою рецензию</button>
             </div>
             <div class="review-list">
                 <ReviewCard v-for="review in exampleReviews" :key="review.id" :content="review"/>
@@ -127,6 +127,11 @@ let exampleReviews: Review[] = [
     display: flex;
     gap: 2rem;
     align-items: center ;
+}
+.review-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
 }
 .range-indicator {
     appearance: none;

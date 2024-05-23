@@ -10,7 +10,7 @@ import WatchedCard from './components/WatchedCard.vue';
 
 const card = new WatchedMovie(
     {
-        posterURI: "https://placehold.it/100x100",
+        posterURI: "https://placehold.it/200x300",
         title: "Гарри поттер и кубок огня",
         rating: 9.1,
         id: 1,

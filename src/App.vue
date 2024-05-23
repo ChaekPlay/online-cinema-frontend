@@ -7,7 +7,7 @@ import { RouterLink, RouterView } from 'vue-router'
     <RouterLink to="/" class="logo" href="">Фильмотека</RouterLink>
     <nav>
       <RouterLink to="/" class="headline-md">Главная</RouterLink>
-      <RouterLink to="/about" class="headline-md">Список просмотренного</RouterLink>
+      <RouterLink to="/watched-movies" class="headline-md">Список просмотренного</RouterLink>
     </nav>
   </header>
   <RouterView />

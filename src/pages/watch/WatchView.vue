@@ -2,7 +2,7 @@
     <div class="watch view">
         <div class="watch-header">
             <h1 class="display-lg">Смотреть</h1>
-            <a class="title-lg">Вернуться на страницу фильма</a>
+            <a class="title-lg" @click="$router.back()">Вернуться на страницу фильма</a>
         </div>
         <div class="player">
         </div>

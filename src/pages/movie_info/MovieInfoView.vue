@@ -4,15 +4,15 @@
         <div class="movie-info-container">
             <div class="movie-info-actions">
                 <div class="movie-action-bar">
-                    <button class="btn btn-accent btn-icon-text watch label-lg"><img class="icon-sm"
+                    <button class="btn btn-accent btn-icon-text watch label-lg" @click="$router.push('1/watch')"><img class="icon-sm"
                             src="@/static/icons/watch.svg" alt="смотреть">Смотреть</button>
-                    <button class="btn btn-icon btn-primary"><img class="icon-sm" src="@/static/icons/bookmark.svg"
+                    <button class="btn btn-icon btn-primary"><img class="icon-lg" src="@/static/icons/bookmark.svg"
                             alt="добавить в список просмотренного"></button>
                 </div>
                 <div class="movie-rating">
                     <h3 class="headline-lg">Общая оценка:</h3>
                     <p class="display-lg">9.1</p>
-                    <button class="btn btn-glass label-lg overlay">Оценки и рецензии</button>
+                    <button class="btn btn-glass label-lg overlay" @click="$router.push('1/reviews')">Оценки и рецензии</button>
                 </div>
             </div>
             <div class="movie-description">
@@ -28,7 +28,7 @@
             <div class="movie-actors">
                 <h3 class="title-md">Актерский состав</h3>
                 <div class="actor-list">
-                    <MovieActorCard v-for="actor in actors" :actor="actor" :key="actor.id"/>
+                    <MovieActorCard v-for="actor in actors" :actor="actor" :key="actor.id" @click="$router.replace('/actor/1')"/>
                 </div>
             </div>
         </div>
@@ -66,6 +66,7 @@
 .movie-action-bar {
     display: flex;
     align-items: start;
+    justify-content: center;
     gap: 0.5rem;
 }
 
@@ -112,7 +113,7 @@
 }
 </style>
 <script setup lang="ts">
-import MovieActorCard from './components/MovieActorCard.vue';
+import MovieActorCard from './components/ActorCard.vue';
 import { onMounted } from 'vue';
 import getMovieInfo from './api/get_movie_info';
 import ActorSummary from '@/models/ActorSummary';
