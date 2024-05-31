@@ -18,6 +18,7 @@
   /* state */
 
   --primary-hover: #9cc35d;
+  --primary-disabled: #d9f1c4;
   --primary-glass-hover: #eef9dd;
   --accent-hover: #fe8640;
 }

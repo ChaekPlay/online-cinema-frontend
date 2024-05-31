@@ -1,17 +1,27 @@
+import type { UUID } from 'crypto'
+
 export default class SearchResult {
-  id!: number
+  id!: UUID
   title!: string
-  year!: number
-  genre!: string
+  releaseDate!: Date
+  genres!: string[]
   posterURI!: string
   shortDescription!: string
   rating!: number
 
-  constructor({ id, title, year, genre, posterURI, shortDescription, rating }: SearchResult) {
+  constructor({
+    id,
+    title,
+    releaseDate,
+    genres,
+    posterURI,
+    shortDescription,
+    rating
+  }: SearchResult) {
     this.id = id
     this.title = title
-    this.year = year
-    this.genre = genre
+    this.releaseDate = releaseDate
+    this.genres = genres
     this.posterURI = posterURI
     this.shortDescription = shortDescription
     this.rating = rating

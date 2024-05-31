@@ -33,12 +33,12 @@ const router = createRouter({
       component: () => import('../pages/watch/WatchView.vue')
     },
     {
-      path: '/movie/:id',
+      path: '/movie/:id/',
       name: 'movie',
       component: () => import('../pages/movie_info/MovieInfoView.vue')
     },
     {
-      path: '/actor/:id',
+      path: '/actor/:id/',
       name: 'actor',
       component: () => import('../pages/actor_info/ActorInfoView.vue')
     },
@@ -56,11 +56,6 @@ const router = createRouter({
       path: '/movie/:id/review-success',
       name: 'review-success',
       component: () => import('../pages/review_success/ReviewSuccessView.vue')
-    },
-    {
-      path: '/actor/:id',
-      name: 'actor-info',
-      component: () => import('../pages/actor_info/ActorInfoView.vue')
     }
   ]
 })
