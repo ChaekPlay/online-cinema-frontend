@@ -17,7 +17,6 @@ export default async function getMovieInfo(id: UUID) {
 }
 
 export function convertMovieInfo(movie: any) {
-  console.log(movie)
   const result = new MovieInfo({
     id: movie.id,
     title: movie.title,

@@ -1,36 +1,36 @@
 <template>
     <div class="watched-movies view">
-        <WatchedCard v-for="card in examples" :key="card.id" :content="card"/>
+        <h1 class="display-lg">Просмотренные фильмы</h1>
+        <p class="txt-body-lg empty-text " v-if="store.watchedList.length == 0">Здесь пусто... Фильмы можно добавить
+            со
+            страницы
+            фильма</p>
+        <div class="watched-grid">
+            <WatchedCard v-for="card in store.watchedList" :key="card.id" :content="card" />
+        </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import WatchedMovie from '@/models/WatchedMovie';
 import WatchedCard from './components/WatchedCard.vue';
+import { useWatchedListStore } from '@/store/WatchedListStore';
 
-const card = new WatchedMovie(
-    {
-        posterURI: "https://placehold.it/200x300",
-        title: "Гарри поттер и кубок огня",
-        rating: 9.1,
-        id: 1,
-        year: 2003
-    }
-);
-let examples: WatchedMovie[] = [];
-for(let i = 0; i < 10; i++) {
-    examples.push(card);
-    card.id++;
-}
+let store = useWatchedListStore();
 
 </script>
 <style scoped>
-
 .watched-movies {
     margin: 2rem auto;
+}
+
+.empty-text {
+    margin-top: 2rem;
+}
+
+.watched-grid {
+    margin-top: 2rem;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    row-gap: 1rem;
-    column-gap: 4rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
 }
 </style>

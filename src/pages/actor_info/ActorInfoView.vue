@@ -3,18 +3,15 @@
         <img class="poster" src="https://placehold.it/500x850" alt="постер">
         <div class="actor-info-container">
             <div class="actor-description">
-                <h2 class="headline-lg">Имя Фамилия</h2>
+                <h2 class="headline-lg">{{ actor.name }}</h2>
                 <h3 class="title-md">Биография</h3>
-                <p class="body-lg description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque dolor
-                    doloremque
-                    veritatis ipsum
-                    soluta expedita delectus, laborum asperiores facilis, fugiat eligendi. Architecto eum aut maxime ea
-                    odit dignissimos, perspiciatis nesciunt!</p>
+                <p class="body-lg description">{{ actor.information }}</p>
             </div>
             <div class="actor-roles">
                 <h3 class="title-md">Роли актера</h3>
                 <div class="actor-roles-list">
-                    <MovieCard v-for="movieRole in movieRoles" :movieRole="movieRole" :key="movieRole.id" @click="$router.replace('/movie/1')"/>
+                    <MovieCard v-for="movieRole in actor.films" :movieRole="movieRole" :key="movieRole.id"
+                        @click="$router.replace('/movie/1')" />
                 </div>
             </div>
         </div>
@@ -23,21 +20,41 @@
 <script setup lang="ts">
 import MovieRole from '@/models/MovieRole';
 import MovieCard from './components/MovieCard.vue';
+import { convertActorInfo, getActorInfo } from './api/get_actor_info';
+import Actor from '@/models/Actor';
+import { onMounted, ref } from 'vue';
+import router from '@/router';
 
-const movieRoles = [
-    new MovieRole({id: 1, title: 'Титаник', role: 'Актер'}),
-    new MovieRole({id: 2, title: 'Титаник', role: 'Актер'}),
-    new MovieRole({id: 3, title: 'Титаник', role: 'Актер'}),
-]
+let actor = ref(new Actor({
+    id: '',
+    name: 'Имя Фамилия',
+    birthdate: new Date(1990, 0, 1),
+    information: 'Информация',
+}))
+async function getActor(id: string) {
+    let res = await getActorInfo(id);
+    console.log(res);
+    // TODO: get actor's movie roles
+    try {
+        actor.value = convertActorInfo(res.data);
+    }
+    catch {
+        console.log(res.error);
+    }
+}
+
+onMounted(() => {
+    getActor(router.currentRoute.value.params.id as string);
+})
 
 </script>
 <style scoped>
 .actor-info {
-    margin: 2rem auto; 
+    margin: 2rem auto;
     display: flex;
     gap: 3rem;
     align-items: start;
-    max-width:100vw;
+    max-width: 100vw;
 }
 
 .poster {
@@ -64,11 +81,13 @@ const movieRoles = [
 .overlay {
     z-index: 1;
 }
+
 .actor-roles {
     width: clamp(600px, 50vw, 1000px);
     margin-top: 3rem;
 }
-.actor-roles-list {   
+
+.actor-roles-list {
     margin-top: 2rem;
     display: flex;
     scrollbar-color: var(--primary) var(--background);
@@ -76,10 +95,12 @@ const movieRoles = [
     overflow-x: auto;
     scroll-snap-type: x mandatory;
 }
+
 @media screen and (max-width: 1200px) {
     .actor-info {
         flex-direction: column;
     }
+
     .actor-roles {
         width: clamp(300px, 90vw, 900px);
     }

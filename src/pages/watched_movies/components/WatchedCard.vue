@@ -1,19 +1,22 @@
 <template>
     <div class="watched-card">
-        <img class="poster" :src="content?.posterURI || 'https://placehold.it/200x300'" alt="Постер">
+        <img class="poster" :src="props.content?.posterURI || 'https://placehold.it/200x300'" alt="Постер">
         <div class="card-info">
-            <p class="title-lg">{{ content?.title }}</p>
-            <p class="txt-body-md">Оценка: {{ content?.rating }}</p>
+            <p class="title-lg">{{ content.title }}</p>
+            <p class="txt-body-md">Оценка: 7.7</p>
         </div>
-        <span @click='console.log("clicked")'><img class="icon-md" src="@/static/icons/settings.svg" alt=""></span>
+        <span class="clickable" @click='useWatchedListStore().removeFromWatchedList(content)'><img class="icon-lg"
+                src="@/static/icons/trash.svg" alt=""></span>
     </div>
 </template>
 <script setup lang="ts">
-import WatchedMovie from '@/models/WatchedMovie';
+import MovieInfo from '@/models/Movie';
+import { useWatchedListStore } from '@/store/WatchedListStore';
 
-defineProps({
-    content: WatchedMovie
-});
+
+const props = defineProps<{
+    content: MovieInfo
+}>();
 </script>
 <style scoped>
 .watched-card {
@@ -25,17 +28,32 @@ defineProps({
     overflow: hidden;
 }
 
+.watched-card:hover {
+    cursor: pointer;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.icon-lg:hover {
+    background: var(--outline);
+    border-radius: 16px;
+}
+
 .watched-card .poster {
     width: 150px;
     height: 100%;
     object-fit: contain;
     border-radius: 0.75rem;
 }
+
 .card-info {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
+
 span {
     padding: 3rem;
 }

@@ -6,8 +6,12 @@
                 <div class="movie-action-bar">
                     <button class="btn btn-accent btn-icon-text watch label-lg" @click="$router.push('watch')"><img
                             class="icon-sm" src="@/static/icons/watch.svg" alt="смотреть">Смотреть</button>
-                    <button class="btn btn-icon btn-primary"><img class="icon-lg" src="@/static/icons/bookmark.svg"
+                    <button v-if="!isAddedToWatchedList()" @click="addToWatchList" class="btn btn-icon btn-primary"><img
+                            class="icon-lg" src="@/static/icons/bookmark.svg"
                             alt="добавить в список просмотренного"></button>
+                    <button v-if="isAddedToWatchedList()" @click="removeFromWatchList"
+                        class="btn btn-icon btn-danger"><img class="icon-lg" src="@/static/icons/trash.svg"
+                            alt="удалить"></button>
                 </div>
                 <div class="movie-rating">
                     <h3 class="headline-lg">Общая оценка:</h3>
@@ -121,6 +125,7 @@ import MovieInfo from '@/models/Movie';
 import ActorCard from './components/ActorCard.vue';
 import router from '@/router';
 import Director from '@/models/Director';
+import { useWatchedListStore } from '@/store/WatchedListStore';
 let movie = ref(new MovieInfo({
     id: 0,
     title: "",
@@ -138,6 +143,7 @@ let movie = ref(new MovieInfo({
     }
     )
 }));
+const watchedStore = useWatchedListStore();
 onMounted(async () => {
     let id = router.currentRoute.value.params.id ?? "";
     let res = await getMovieInfo(id);
@@ -148,4 +154,13 @@ onMounted(async () => {
         console.log(res.error);
     }
 })
+function addToWatchList() {
+    watchedStore.addToWatchedList(movie.value);
+}
+function removeFromWatchList() {
+    watchedStore.removeFromWatchedList(movie.value);
+}
+function isAddedToWatchedList() {
+    return watchedStore.isAddedToWatchedList(movie.value);
+}
 </script>

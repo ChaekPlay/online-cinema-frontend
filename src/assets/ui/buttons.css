@@ -36,6 +36,13 @@
   align-items: center;
   gap: 1rem;
 }
+.btn-danger {
+  background-color: var(--error);
+  color: var(--light-text);
+}
+.btn-danger:hover {
+  background-color: var(--error-hover);
+}
 .link {
   text-decoration: none;
   cursor: pointer;
