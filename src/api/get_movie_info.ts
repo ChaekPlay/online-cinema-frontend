@@ -30,6 +30,7 @@ export async function getSeriesInfo(id: UUID) {
 }
 
 export function convertInfo(movie: any) {
+  console.log(movie)
   const result = new MediaContent({
     id: movie.id,
     title: movie.title,
@@ -47,7 +48,7 @@ export function convertInfo(movie: any) {
       })
     }),
     director: movie.director,
-    seasons: movie.seasons.length
+    seasons: movie.seasons ?? {}
   })
   console.log(result.id)
   return result

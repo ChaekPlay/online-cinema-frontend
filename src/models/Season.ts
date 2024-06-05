@@ -1,7 +1,8 @@
+import type { UUID } from 'crypto'
 import type Episode from './Episode'
 
 export default class Season {
-  id!: number
+  id!: UUID
   title!: string
   description!: string
   releaseYear!: number

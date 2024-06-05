@@ -2,6 +2,7 @@ import type { UUID } from 'crypto'
 import type Genre from './Genre'
 import type Actor from './Actor'
 import type Director from './Director'
+import type Season from './Season'
 
 export default class MediaContent {
   id!: UUID
@@ -13,7 +14,7 @@ export default class MediaContent {
   director?: Director
   rating!: number
   year!: number
-  seasons?: number
+  seasons?: Season[]
   constructor({
     id,
     title,
