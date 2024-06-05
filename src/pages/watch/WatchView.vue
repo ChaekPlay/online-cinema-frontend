@@ -6,6 +6,14 @@
         </div>
         <div class="player">
         </div>
+        <div class="episode-choose">
+            <select name="season" id="season" class="txt-body-lg">
+                <option v-for="season in 10" :key="season" :value="season">Сезон {{ season }}</option>
+            </select>
+            <select name="episode" id="episode" class="txt-body-lg">
+                <option v-for="episode in 10" :key="episode" :value="episode">Эпизод {{ episode }}</option>
+            </select>
+        </div>
     </div>
 </template>
 <script setup lang="ts"></script>
@@ -16,20 +24,24 @@
     flex-direction: column;
     gap: 2rem;
 }
+
 .watch-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
 }
+
 a {
     color: var(--primary);
     text-decoration: none;
     cursor: pointer;
 }
+
 a:hover {
     text-decoration: underline;
 }
+
 .player {
     aspect-ratio: 16 / 9;
     width: 100%;

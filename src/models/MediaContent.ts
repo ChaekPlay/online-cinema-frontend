@@ -3,16 +3,17 @@ import type Genre from './Genre'
 import type Actor from './Actor'
 import type Director from './Director'
 
-export default class MovieInfo {
+export default class MediaContent {
   id!: UUID
   title!: string
   description!: string
   posterURI?: string
   genres!: Genre[]
-  actors!: Actor[]
-  director!: Director
+  actors?: Actor[]
+  director?: Director
   rating!: number
   year!: number
+  seasons?: number
   constructor({
     id,
     title,
@@ -22,8 +23,9 @@ export default class MovieInfo {
     posterURI,
     director,
     rating,
-    year
-  }: MovieInfo) {
+    year,
+    seasons
+  }: MediaContent) {
     this.id = id
     this.title = title
     this.description = description
@@ -33,5 +35,6 @@ export default class MovieInfo {
     this.director = director
     this.rating = rating
     this.year = year
+    this.seasons = seasons
   }
 }

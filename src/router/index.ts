@@ -28,9 +28,9 @@ const router = createRouter({
       component: () => import('../pages/watched_movies/WatchedMoviesView.vue')
     },
     {
-      path: '/movie/:id/watch',
-      name: 'watch',
-      component: () => import('../pages/watch/WatchView.vue')
+      path: '/actor/:id/',
+      name: 'actor',
+      component: () => import('../pages/actor_info/ActorInfoView.vue')
     },
     {
       path: '/movie/:id/',
@@ -38,23 +38,48 @@ const router = createRouter({
       component: () => import('../pages/movie_info/MovieInfoView.vue')
     },
     {
-      path: '/actor/:id/',
-      name: 'actor',
-      component: () => import('../pages/actor_info/ActorInfoView.vue')
+      path: '/movie/:id/watch',
+      name: 'movie-watch',
+      component: () => import('../pages/watch/WatchView.vue')
     },
     {
       path: '/movie/:id/reviews',
-      name: 'reviews',
+      name: 'movie-reviews',
       component: () => import('../pages/ratings_and_reviews/RatingsAndReviewsView.vue')
     },
     {
       path: '/movie/:id/create-review',
-      name: 'create-review',
+      name: 'movie-create-review',
       component: () => import('../pages/review_creation/ReviewCreationView.vue')
     },
     {
       path: '/movie/:id/review-success',
-      name: 'review-success',
+      name: 'movie-review-success',
+      component: () => import('../pages/review_success/ReviewSuccessView.vue')
+    },
+    {
+      path: '/series/:id/',
+      name: 'series',
+      component: () => import('../pages/movie_info/MovieInfoView.vue')
+    },
+    {
+      path: '/series/:id/watch',
+      name: 'series-watch',
+      component: () => import('../pages/watch/WatchView.vue')
+    },
+    {
+      path: '/series/:id/reviews',
+      name: 'series-reviews',
+      component: () => import('../pages/ratings_and_reviews/RatingsAndReviewsView.vue')
+    },
+    {
+      path: '/series/:id/create-review',
+      name: 'series-create-review',
+      component: () => import('../pages/review_creation/ReviewCreationView.vue')
+    },
+    {
+      path: '/series/:id/review-success',
+      name: 'series-review-success',
       component: () => import('../pages/review_success/ReviewSuccessView.vue')
     }
   ]

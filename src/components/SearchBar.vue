@@ -2,7 +2,7 @@
   <div class="search-bar">
     <form method="get" @submit.prevent="search">
       <input type="text" name="query" id="query" placeholder="Например, Гарри Поттер" v-model="searchQuery">
-      <button type="submit" name="find" id="find">Найти</button>
+      <button class="btn btn-primary" type="submit" name="find" id="find">Найти</button>
     </form>
   </div>
 </template>
@@ -39,19 +39,17 @@ button[type="submit"] {
   color: var(--light-text);
   font-size: 45px;
 }
-
-button[type="submit"]:hover {
-  filter: brightness(110%);
-  cursor: pointer;
-}
 </style>
 <script setup lang="ts">
 import router from '@/router';
 import { ref } from 'vue';
 
+const emit = defineEmits(["updateQuery"]);
+
 const searchQuery = ref("");
 function search() {
   console.log("i am at search results");
+  emit("updateQuery", searchQuery.value);
   router.push({ path: "/search", query: { query: searchQuery.value } });
 }
 </script>

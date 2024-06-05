@@ -1,8 +1,7 @@
 import { API } from '@/api'
-import Movie from '@/models/MediaContent'
+import Series from '@/models/MediaContent'
 
-// get movies by search query
-export async function getMovies(
+export async function getSeries(
   query: string,
   pageSize: number,
   pageNumber: number,
@@ -10,7 +9,7 @@ export async function getMovies(
 ) {
   const result = { data: null, error: null, totalCount: null }
   console.log(filters)
-  await API.get(`film`, {
+  await API.get(`series`, {
     params: {
       pageSize: pageSize,
       pageNumber: pageNumber,
@@ -31,17 +30,18 @@ export async function getMovies(
   return result
 }
 
-export function convertMovies(movies: any) {
-  console.log(movies)
-  return movies.data.map((movie: any) => {
-    return new Movie({
+export function convertSeries(series: any) {
+  console.log(series)
+  return series.data.map((movie: any) => {
+    return new Series({
       id: movie.id,
       title: movie.title,
       year: new Date(movie.releaseDate).getFullYear(),
       genres: movie.genres,
       posterURI: movie.poster ?? null,
       description: movie.description,
-      rating: movie.averageRating
+      rating: movie.averageRating,
+      seasons: movie.seasons.length
     })
   })
 }

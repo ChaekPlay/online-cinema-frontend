@@ -22,9 +22,10 @@
             </div>
             <div class="movie-description">
                 <h2 class="headline-lg">{{ movie.title }}</h2>
-                <p class="body-lg">Режиссер: {{ movie.director.name }}</p>
+                <p class="body-lg">Режиссер: {{ movie.director!.name }}</p>
                 <h3 class="title-md">Описание</h3>
                 <p class="body-lg description">{{ movie.description }}</p>
+                <p v-if="movie.seasons" class="body-lg">Количество сезонов: {{ movie.seasons }}</p>
             </div>
             <div class="movie-actors">
                 <h3 class="title-md">Актерский состав</h3>
@@ -120,13 +121,13 @@
 </style>
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import getMovieInfo, { convertMovieInfo } from './api/get_movie_info';
-import MovieInfo from '@/models/Movie';
+import getMovieInfo, { convertInfo, getSeriesInfo } from './api/get_movie_info';
+import MediaContent from '@/models/MediaContent';
 import ActorCard from './components/ActorCard.vue';
 import router from '@/router';
 import Director from '@/models/Director';
 import { useWatchedListStore } from '@/store/WatchedListStore';
-let movie = ref(new MovieInfo({
+let movie = ref(new MediaContent({
     id: 0,
     title: "",
     year: 0,
@@ -141,14 +142,22 @@ let movie = ref(new MovieInfo({
         birthdate: new Date(),
         information: ""
     }
-    )
+    ),
+    seasons: 0
 }));
 const watchedStore = useWatchedListStore();
 onMounted(async () => {
     let id = router.currentRoute.value.params.id ?? "";
-    let res = await getMovieInfo(id);
+    let type = router.currentRoute.value.name;
+    let res: any;
+    if (type === "movie") {
+        res = await getMovieInfo(id);
+    }
+    else {
+        res = await getSeriesInfo(id);
+    }
     try {
-        movie.value = convertMovieInfo(res.data);
+        movie.value = convertInfo(res.data);
     }
     catch {
         console.log(res.error);

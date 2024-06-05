@@ -16,3 +16,6 @@
   min-height: 75vh;
   padding: 1rem;
 }
+input {
+  padding: 1rem 1rem;
+}

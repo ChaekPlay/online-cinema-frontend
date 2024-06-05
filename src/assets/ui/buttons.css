@@ -13,6 +13,9 @@
 .btn-primary:hover {
   background-color: var(--primary-hover);
 }
+.btn-primary:disabled {
+  background-color: var(--primary-disabled);
+}
 .btn-glass {
   background-color: var(--background);
   color: var(--primary);

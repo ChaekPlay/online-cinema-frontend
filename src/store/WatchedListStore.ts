@@ -1,20 +1,20 @@
-import type MovieInfo from '@/models/Movie'
+import type MediaContent from '@/models/MediaContent'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
 export const useWatchedListStore = defineStore('watchedList', () => {
-  const watchedList = ref([] as MovieInfo[])
+  const watchedList = ref([] as MediaContent[])
 
   if (localStorage.getItem('watched')) {
     watchedList.value = JSON.parse(localStorage.getItem('watched')!).watchedList
   }
-  function addToWatchedList(movie: MovieInfo) {
+  function addToWatchedList(movie: MediaContent) {
     watchedList.value.push(movie)
   }
-  function removeFromWatchedList(movie: MovieInfo) {
+  function removeFromWatchedList(movie: MediaContent) {
     watchedList.value.splice(watchedList.value.indexOf(movie), 1)
   }
-  function isAddedToWatchedList(movie: MovieInfo) {
+  function isAddedToWatchedList(movie: MediaContent) {
     return watchedList.value.some((item) => item.id === movie.id)
   }
   function isEmpty() {

@@ -5,22 +5,31 @@
             <div class="search-result-card-content-header">
                 <div class="search-result-card-content-header-info">
                     <h3>{{ content.title }}</h3>
-                    <p>Год выхода: {{ content.releaseDate.getFullYear() }}</p>
+                    <p>Год выхода: {{ content.year }}</p>
                 </div>
-                <span class="search-result-card-rating">{{ 7.7 }}</span>
+                <span class="search-result-card-rating">{{ content.rating ?? '--' }}</span>
             </div>
-            <p>{{ content.shortDescription }}
+            <p>{{ content.description }}
             </p>
+            <p>{{ parseGenres(content.genres) }}</p>
+            <p v-if="content.seasons">Количество сезонов: {{ content.seasons }}</p>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import SearchResult from '@/models/SearchResult';
+import type Genre from '@/models/Genre';
+import type MediaContent from '@/models/MediaContent';
 
 defineProps<{
-    'content': SearchResult
+    'content': MediaContent
 }>()
+
+function parseGenres(genres: Genre[] | undefined) {
+    if (!genres) return '--';
+    return genres.map(genre => genre.name).join(', ');
+}
+
 </script>
 <style scoped>
 .search-result-card {
