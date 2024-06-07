@@ -81,6 +81,11 @@ const router = createRouter({
       path: '/series/:id/review-success',
       name: 'series-review-success',
       component: () => import('../pages/review_success/ReviewSuccessView.vue')
+    },
+    {
+      path: '/admin/models',
+      name: 'models',
+      component: () => import('../pages/_admin/view/ViewFilmsAndSeries.vue')
     }
   ]
 })

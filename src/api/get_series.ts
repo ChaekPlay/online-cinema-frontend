@@ -8,15 +8,15 @@ export async function getSeries(
   filters?: any
 ) {
   const result = { data: null, error: null, totalCount: null }
-  console.log(filters)
+  console.log('filters: ' + filters)
   await API.get(`series`, {
     params: {
       pageSize: pageSize,
       pageNumber: pageNumber,
       title: query,
-      genres: filters.genres.join(',') ?? '',
-      actors: filters.actors.join(',') ?? '',
-      director: filters.director ?? ''
+      genres: filters?.genres.join(',') ?? '',
+      actors: filters?.actors.join(',') ?? '',
+      director: filters?.director ?? ''
     }
   })
     .then((response: any) => {
