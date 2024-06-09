@@ -86,6 +86,16 @@ const router = createRouter({
       path: '/admin/models',
       name: 'models',
       component: () => import('../pages/_admin/view/ViewFilmsAndSeries.vue')
+    },
+    {
+      path: '/admin/models/:modelname/:id/edit',
+      name: 'edit-model',
+      component: () => import('../pages/_admin/edit/EditModel.vue')
+    },
+    {
+      path: '/admin/models/:modelname/create',
+      name: 'create-model',
+      component: () => import('../pages/_admin/edit/EditModel.vue')
     }
   ]
 })

@@ -15,9 +15,9 @@ export async function getMovies(
       pageSize: pageSize,
       pageNumber: pageNumber,
       title: query,
-      genres: filters.genres.join(',') ?? '',
-      actors: filters.actors.join(',') ?? '',
-      director: filters.director ?? ''
+      genres: filters?.genres.join(',') ?? '',
+      actors: filters?.actors.join(',') ?? '',
+      director: filters?.director ?? ''
     }
   })
     .then((response: any) => {

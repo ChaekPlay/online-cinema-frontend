@@ -7,9 +7,9 @@
         <div class="models-switch">
             <slot name="model-switch"></slot>
         </div>
-        <div class="model-grid">
-            <slot name="model-grid"></slot>
-        </div>
+
+        <slot name="model-grid"></slot>
+
         <div class="model-pagination">
             <slot name="model-pagination"></slot>
         </div>
@@ -24,14 +24,24 @@ defineProps<{
 </script>
 
 <style scoped>
-.model-switch {
+.view-models {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.model-search {
     display: flex;
     gap: 1rem;
 }
 
-.model-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+.models-switch {
+    display: flex;
+    gap: 1rem;
+}
+
+.model-switch {
+    display: flex;
     gap: 1rem;
 }
 </style>

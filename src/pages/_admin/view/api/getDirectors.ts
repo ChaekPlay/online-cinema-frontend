@@ -1,17 +1,17 @@
 import { API } from '@/api'
 import Director from '@/models/Director'
 
-export function getDirectors(query: string, pageSize: number, pageNumber: number) {
+export async function getDirectors(pageSize: number, pageNumber: number) {
   const result = { data: null, error: null }
-  API.get(`/director`, {
+  await API.get(`/director`, {
     params: {
       pageSize: pageSize,
-      pageNumber: pageNumber,
-      name: query
+      pageNumber: pageNumber
     }
   })
     .then((response) => {
       result.data = response.data
+      result.totalCount = response.data.totalCount
     })
     .catch((error) => {
       console.log(error)

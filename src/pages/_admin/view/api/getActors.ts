@@ -1,18 +1,17 @@
 import { API } from '@/api'
 import Actor from '@/models/Actor'
 
-export function getActors( query: string, pageSize: number, pageNumber: number) {
-    
+export async function getActors(pageSize: number, pageNumber: number) {
   const result = { data: null, error: null, totalCount: null }
-  API.get(`/actor`, {
+  await API.get(`/actor`, {
     params: {
       pageSize: pageSize,
-      pageNumber: pageNumber,
-      name: query
+      pageNumber: pageNumber
     }
   })
     .then((response) => {
       result.data = response.data
+      result.totalCount = response.data.totalCount
     })
     .catch((error) => {
       console.log(error)

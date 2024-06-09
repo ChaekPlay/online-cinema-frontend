@@ -1,18 +1,68 @@
 <template>
     <ViewModels :title="'Модели'">
         <template #model-search>
-            <input type="text" name="q" id="q" placeholder="Поиск по модели" v-model="query">
-            <button @click="search" class="btn btn-primary">Поиск</button>
+            <div class="input-field" v-if="activeIndex == 0 || activeIndex == 1">
+                <input class="txt-body-lg" type="text" name="q" id="q" placeholder="Поиск по модели" v-model="query">
+                <button @click="search" class="btn btn-primary txt-body-lg">Поиск</button>
+            </div>
         </template>
         <template #model-switch>
-            <button v-for="model in models" :key="model.id" @click="activeIndex = model.id"
+            <button v-for="model in models" :key="model.id" @click="switchIndex(model.id)"
                 :disabled="activeIndex == model.id" class="btn btn-primary">{{ model.name }}</button>
         </template>
-        <template #model-grid>
-            <ModelCard v-for="model in modelObjects" :key="model.id" :objectid="model.id">
-                <template #card-title>{{ model.name }}</template>
-                <template #card-content></template>
-            </ModelCard>
+        <template v-slot:model-grid>
+            <div class="model-grid" v-if="activeIndex == 0">
+                <ModelCard v-for="model in modelObjects" :key="model.id" :objectid="model.id"
+                    @click="$router.push({ name: 'edit-model', params: { modelname: 'series', id: model.id } })">
+                    <template #card-title>{{ model.title }}</template>
+                    <template #card-content>
+                        <p>ID: {{ model.id }}</p>
+                        <div class="genres">
+                            Жанры:
+                            <p v-for="genre in model.genres" :key="genre">{{ genre.name }}</p>
+                        </div>
+                        <p>Описание: {{ model.description }}</p>
+                        <p>Год выхода: {{ model.year }}</p>
+                    </template>
+                </ModelCard>
+            </div>
+            <div class="model-grid" v-if="activeIndex == 1">
+                <ModelCard v-for="model in modelObjects" :key="model.id" :objectid="model.id"
+                    @click="$router.push({ name: 'edit-model', params: { modelname: 'film', id: model.id } })">
+                    <template #card-title>{{ model.title }}</template>
+                    <template #card-content>
+                        <p>ID: {{ model.id }}</p>
+                        <div class="genres">
+                            Жанры:
+                            <p v-for="genre in model.genres" :key="genre">{{ genre.name }}</p>
+                        </div>
+                        <p>Описание: {{ model.description }}</p>
+                        <p>Год выхода: {{ model.year }}</p>
+                    </template>
+                </ModelCard>
+            </div>
+            <div class="model-grid" v-if="activeIndex == 2">
+                <ModelCard v-for="model in modelObjects" :key="model.id" :objectid="model.id"
+                    @click="$router.push({ name: 'edit-model', params: { modelname: 'actor', id: model.id } })">
+                    <template #card-title>{{ model.name }}</template>
+                    <template #card-content>
+                        <p>ID: {{ model.id }}</p>
+                        <p>Биография: {{ model.information }}</p>
+                        <p>Дата рождения: {{ getLocalDate(model.birthdate) }}</p>
+                    </template>
+                </ModelCard>
+            </div>
+            <div class="model-grid" v-if="activeIndex == 3">
+                <ModelCard v-for="model in modelObjects" :key="model.id" :objectid="model.id"
+                    @click="$router.push({ name: 'edit-model', params: { modelname: 'director', id: model.id } })">
+                    <template #card-title>{{ model.name }}</template>
+                    <template #card-content>
+                        <p>ID: {{ model.id }}</p>
+                        <p>Биография: {{ model.information }}</p>
+                        <p>Дата рождения: {{ getLocalDate(model.birthdate) }}</p>
+                    </template>
+                </ModelCard>
+            </div>
         </template>
         <template #model-pagination>
             <SearchPaginator :modelValue="currentPage" :page_first="page_first" :page_last="page_last" />
@@ -23,11 +73,11 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import ViewModels from '../templates/ViewModels.vue';
-import { getSeries } from '@/api/get_series';
-import { getMovies } from '@/api/get_movies';
+import { convertSeries, getSeries } from '@/api/get_series';
+import { convertMovies, getMovies } from '@/api/get_movies';
 import SearchPaginator from '@/components/SearchPaginator.vue';
-import { getActors } from './api/getActors';
-import { getDirectors } from './api/getDirectors';
+import { convertActors, getActors } from './api/getActors';
+import { convertDirectors, getDirectors } from './api/getDirectors';
 import ModelCard from '../templates/ModelCard.vue';
 
 let models = [
@@ -60,21 +110,37 @@ onMounted(async () => {
     await search();
 })
 
+function getLocalDate(date: Date | undefined) {
+    return date?.toLocaleDateString() ?? 'Неизвестно';
+}
+
+async function switchIndex(index: number) {
+    activeIndex.value = index;
+    await search();
+}
+
 async function search() {
+    console.log(query.value)
     let res: any;
     try {
         switch (activeIndex.value) {
             case 0:
                 res = await getSeries(query.value, pageSize, currentPage.value - 1);
+                modelObjects.value = convertSeries(res.data);
                 break;
             case 1:
                 res = await getMovies(query.value, pageSize, currentPage.value - 1);
+                modelObjects.value = convertMovies(res.data);
                 break;
             case 2:
-                res = await getActors(query.value, pageSize, currentPage.value - 1);
+                res = await getActors(pageSize, currentPage.value - 1);
+                console.log(res)
+                modelObjects.value = convertActors(res.data);
                 break;
             case 3:
-                res = await getDirectors(query.value, pageSize, currentPage.value - 1);
+                res = await getDirectors(pageSize, currentPage.value - 1);
+                console.log(res);
+                modelObjects.value = convertDirectors(res.data);
                 break;
             default:
                 break;
@@ -86,4 +152,15 @@ async function search() {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.input-field {
+    display: flex;
+    gap: 1rem;
+}
+
+.model-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+}
+</style>
