@@ -5,7 +5,7 @@
             <div class="search-result-card-content-header">
                 <div class="search-result-card-content-header-info">
                     <h3>{{ content.title }}</h3>
-                    <p>Год выхода: {{ content.year }}</p>
+                    <p>Год выхода: {{ content.releaseDate.getFullYear() }}</p>
                 </div>
                 <span class="search-result-card-rating">{{ content.rating ?? '--' }}</span>
             </div>

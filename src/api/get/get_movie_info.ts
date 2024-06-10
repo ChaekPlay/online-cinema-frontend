@@ -30,11 +30,10 @@ export async function getSeriesInfo(id: UUID) {
 }
 
 export function convertInfo(movie: any) {
-  console.log(movie)
   const result = new MediaContent({
     id: movie.id,
     title: movie.title,
-    year: new Date(movie.release_date).getFullYear(),
+    releaseDate: new Date(movie.releaseDate),
     genres: movie.genres,
     posterURI: movie.poster ?? 'https://placehold.it/500x850',
     description: movie.description,
@@ -50,6 +49,5 @@ export function convertInfo(movie: any) {
     director: movie.director,
     seasons: movie.seasons ?? {}
   })
-  console.log(result.id)
   return result
 }

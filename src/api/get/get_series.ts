@@ -36,7 +36,7 @@ export function convertSeries(series: any) {
     return new Series({
       id: movie.id,
       title: movie.title,
-      year: new Date(movie.releaseDate).getFullYear(),
+      releaseDate: new Date(movie.releaseDate),
       genres: movie.genres,
       posterURI: movie.poster ?? null,
       description: movie.description,

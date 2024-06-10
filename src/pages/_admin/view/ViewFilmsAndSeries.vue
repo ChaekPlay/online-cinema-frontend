@@ -73,10 +73,10 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import ViewModels from '../templates/ViewModels.vue';
-import { convertSeries, getSeries } from '@/api/get_series';
-import { convertMovies, getMovies } from '@/api/get_movies';
+import { convertSeries, getSeries } from '@/api/get/get_series';
+import { convertMovies, getMovies } from '@/api/get/get_movies';
 import SearchPaginator from '@/components/SearchPaginator.vue';
-import { convertActors, getActors } from './api/getActors';
+import { convertActors, getActors } from '../../../api/get/get_actors';
 import { convertDirectors, getDirectors } from './api/getDirectors';
 import ModelCard from '../templates/ModelCard.vue';
 

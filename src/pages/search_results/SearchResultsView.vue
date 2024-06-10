@@ -39,8 +39,8 @@
 <script setup lang="ts">
 import SearchResultComponent from '@/pages/search_results/components/SearchResult.vue';
 import SearchPaginator from '../../components/SearchPaginator.vue';
-import { getMovies, convertMovies } from '../../api/get_movies';
-import { getSeries, convertSeries } from '../../api/get_series';
+import { getMovies, convertMovies } from '../../api/get/get_movies';
+import { getSeries, convertSeries } from '../../api/get/get_series';
 import { onMounted, reactive, ref } from 'vue';
 import router from '@/router';
 import FilterPicker from './components/FilterPicker.vue';

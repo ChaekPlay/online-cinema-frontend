@@ -121,7 +121,7 @@
 </style>
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import getMovieInfo, { convertInfo, getSeriesInfo } from '../../api/get_movie_info';
+import getMovieInfo, { convertInfo, getSeriesInfo } from '../../api/get/get_movie_info';
 import MediaContent from '@/models/MediaContent';
 import ActorCard from './components/ActorCard.vue';
 import router from '@/router';

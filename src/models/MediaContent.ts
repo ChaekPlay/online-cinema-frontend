@@ -13,7 +13,7 @@ export default class MediaContent {
   actors?: Actor[]
   director?: Director
   rating!: number
-  year!: number
+  releaseDate!: Date
   seasons?: Season[]
   constructor({
     id,
@@ -24,7 +24,7 @@ export default class MediaContent {
     posterURI,
     director,
     rating,
-    year,
+    releaseDate,
     seasons
   }: MediaContent) {
     this.id = id
@@ -35,7 +35,7 @@ export default class MediaContent {
     this.genres = genres
     this.director = director
     this.rating = rating
-    this.year = year
+    this.releaseDate = releaseDate
     this.seasons = seasons
   }
 }

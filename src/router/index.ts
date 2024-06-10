@@ -88,14 +88,24 @@ const router = createRouter({
       component: () => import('../pages/_admin/view/ViewFilmsAndSeries.vue')
     },
     {
-      path: '/admin/models/:modelname/:id/edit',
+      path: '/admin/models/film/:id/edit',
       name: 'edit-model',
-      component: () => import('../pages/_admin/edit/EditModel.vue')
+      component: () => import('../pages/_admin/edit/EditFilm.vue')
     },
     {
-      path: '/admin/models/:modelname/create',
+      path: '/admin/models/film/create',
       name: 'create-model',
-      component: () => import('../pages/_admin/edit/EditModel.vue')
+      component: () => import('../pages/_admin/edit/EditFilm.vue')
+    },
+    {
+      path: '/admin/login',
+      name: 'login',
+      component: () => import('../pages/_admin/login/LoginForm.vue')
+    },
+    {
+      path: '/admin/register',
+      name: 'register',
+      component: () => import('../pages/_admin/register/RegisterForm.vue')
     }
   ]
 })

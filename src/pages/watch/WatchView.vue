@@ -22,7 +22,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import getMovieInfo, { convertInfo, getSeriesInfo } from '@/api/get_movie_info';
+import getMovieInfo, { convertInfo, getSeriesInfo } from '@/api/get/get_movie_info';
 import Director from '@/models/Director';
 import MediaContent from '@/models/MediaContent';
 import Season from '@/models/Season';
@@ -32,7 +32,7 @@ import { onMounted, ref } from 'vue';
 let content = ref(new MediaContent({
     id: 0,
     title: "",
-    year: 0,
+    releaseDate: new Date(),
     genres: [],
     posterURI: "",
     description: "",
