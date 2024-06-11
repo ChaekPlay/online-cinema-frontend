@@ -8,6 +8,8 @@ import { RouterLink, RouterView } from 'vue-router'
     <nav>
       <RouterLink to="/" class="headline-md">Главная</RouterLink>
       <RouterLink to="/watched-movies" class="headline-md">Список просмотренного</RouterLink>
+      <RouterLink to="/admin/login" class="headline-md">Авторизация</RouterLink>
+      <RouterLink to="/admin/register" class="headline-md">Регистрация</RouterLink>
     </nav>
   </header>
   <RouterView />
@@ -30,20 +32,25 @@ header {
   background: var(--primary);
   padding: 2rem;
 }
+
 a {
   color: var(--light-text);
   text-decoration: none;
 }
+
 a:hover {
   text-decoration: underline;
   cursor: pointer;
 }
+
 .logo {
   font-size: 54px;
 }
+
 .logo:hover {
   text-decoration: none;
 }
+
 nav {
   display: flex;
   gap: 64px;
@@ -58,10 +65,12 @@ footer {
   background: var(--primary);
   padding: 2rem;
 }
+
 footer p {
   font-size: 1.5rem;
   color: var(--light-text);
 }
+
 .links {
   display: flex;
   gap: 32px;

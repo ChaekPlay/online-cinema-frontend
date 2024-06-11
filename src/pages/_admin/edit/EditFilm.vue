@@ -18,7 +18,6 @@
                         <input type="number" name="releaseMonth" id="releaseMonth" v-model="date.month">
                         <input type="number" name="releaseYear" id="releaseYear" v-model="date.year">
                     </div>
-
                 </div>
                 <div class="input-field" v-if="loaded">
                     <SelectPicker :options="available_genres" :placeholder="'Выберите жанр'"
