@@ -20,7 +20,7 @@
 <script setup lang="ts">
 import MovieRole from '@/models/MovieRole';
 import MovieCard from './components/MovieCard.vue';
-import { convertActorInfo, getActorInfo } from './api/get_actor_info';
+import { convertActorInfo, getActorInfo } from '../../api/get/get_actor_info';
 import Actor from '@/models/Actor';
 import { onMounted, ref } from 'vue';
 import router from '@/router';

@@ -10,8 +10,8 @@ export default class MediaContent {
   description!: string
   posterURI?: string
   genres!: Genre[]
-  actors?: Actor[]
-  director?: Director
+  actors!: Actor[]
+  director!: Director
   rating!: number
   releaseDate!: Date
   seasons?: Season[]

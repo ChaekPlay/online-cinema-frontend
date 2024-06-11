@@ -75,9 +75,7 @@ function removeFromList(tag: any) {
     gap: 0.5rem;
 }
 
-select {
-    padding: 1rem 1rem;
-}
+
 
 .tag-list {
     display: flex;

@@ -11,39 +11,35 @@
                 :disabled="activeIndex == model.id" class="btn btn-primary">{{ model.name }}</button>
         </template>
         <template v-slot:model-grid>
+            <button class="btn btn-primary" @click="createModel">Создать <img src="@/static/icons/plus.svg"
+                    alt="создать"></button>
             <div class="model-grid" v-if="activeIndex == 0">
                 <ModelCard v-for="model in modelObjects" :key="model.id" :objectid="model.id"
-                    @click="$router.push({ name: 'edit-model', params: { modelname: 'series', id: model.id } })">
+                    @click="$router.push({ name: 'edit-series', params: { id: model.id } })">
                     <template #card-title>{{ model.title }}</template>
                     <template #card-content>
                         <p>ID: {{ model.id }}</p>
-                        <div class="genres">
-                            Жанры:
-                            <p v-for="genre in model.genres" :key="genre">{{ genre.name }}</p>
-                        </div>
+                        <p>Жанры: {{ model.genres?.map((g: any) => g.name).join(', ') ?? '' }}</p>
                         <p>Описание: {{ model.description }}</p>
-                        <p>Год выхода: {{ model.year }}</p>
+                        <p>Год выхода: {{ getLocalDate(model.releaseDate) }}</p>
                     </template>
                 </ModelCard>
             </div>
             <div class="model-grid" v-if="activeIndex == 1">
                 <ModelCard v-for="model in modelObjects" :key="model.id" :objectid="model.id"
-                    @click="$router.push({ name: 'edit-model', params: { modelname: 'film', id: model.id } })">
+                    @click="$router.push({ name: 'edit-film', params: { id: model.id } })">
                     <template #card-title>{{ model.title }}</template>
                     <template #card-content>
                         <p>ID: {{ model.id }}</p>
-                        <div class="genres">
-                            Жанры:
-                            <p v-for="genre in model.genres" :key="genre">{{ genre.name }}</p>
-                        </div>
+                        <p>Жанры: {{ model.genres?.map((g: any) => g.name).join(', ') ?? '' }}</p>
                         <p>Описание: {{ model.description }}</p>
-                        <p>Год выхода: {{ model.year }}</p>
+                        <p>Дата выхода: {{ getLocalDate(model.releaseDate) }}</p>
                     </template>
                 </ModelCard>
             </div>
             <div class="model-grid" v-if="activeIndex == 2">
                 <ModelCard v-for="model in modelObjects" :key="model.id" :objectid="model.id"
-                    @click="$router.push({ name: 'edit-model', params: { modelname: 'actor', id: model.id } })">
+                    @click="$router.push({ name: 'edit-actor', params: { id: model.id } })">
                     <template #card-title>{{ model.name }}</template>
                     <template #card-content>
                         <p>ID: {{ model.id }}</p>
@@ -54,7 +50,7 @@
             </div>
             <div class="model-grid" v-if="activeIndex == 3">
                 <ModelCard v-for="model in modelObjects" :key="model.id" :objectid="model.id"
-                    @click="$router.push({ name: 'edit-model', params: { modelname: 'director', id: model.id } })">
+                    @click="$router.push({ name: 'edit-director', params: { id: model.id } })">
                     <template #card-title>{{ model.name }}</template>
                     <template #card-content>
                         <p>ID: {{ model.id }}</p>
@@ -77,8 +73,9 @@ import { convertSeries, getSeries } from '@/api/get/get_series';
 import { convertMovies, getMovies } from '@/api/get/get_movies';
 import SearchPaginator from '@/components/SearchPaginator.vue';
 import { convertActors, getActors } from '../../../api/get/get_actors';
-import { convertDirectors, getDirectors } from './api/getDirectors';
+import { convertDirectors, getDirectors } from '../../../api/get/get_directors';
 import ModelCard from '../templates/ModelCard.vue';
+import router from '@/router';
 
 let models = [
     {
@@ -117,6 +114,25 @@ function getLocalDate(date: Date | undefined) {
 async function switchIndex(index: number) {
     activeIndex.value = index;
     await search();
+}
+
+function createModel() {
+    switch (activeIndex.value) {
+        case 0:
+            router.push({ name: 'create-series' });
+            break;
+        case 1:
+            router.push({ name: 'create-film' });
+            break;
+        case 2:
+            router.push({ name: 'create-actor' });
+            break;
+        case 3:
+            router.push({ name: 'create-director' });
+            break;
+        default:
+            break;
+    }
 }
 
 async function search() {

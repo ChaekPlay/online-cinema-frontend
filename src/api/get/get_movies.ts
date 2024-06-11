@@ -38,7 +38,9 @@ export function convertMovies(movies: any) {
       id: movie.id,
       title: movie.title,
       releaseDate: new Date(movie.releaseDate),
+      actors: movie.actors,
       genres: movie.genres,
+      director: movie.director,
       posterURI: movie.poster ?? null,
       description: movie.description,
       rating: movie.averageRating

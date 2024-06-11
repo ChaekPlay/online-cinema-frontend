@@ -2,7 +2,7 @@ import { API } from '@/api'
 import Director from '@/models/Director'
 
 export async function getDirectors(pageSize: number, pageNumber: number) {
-  const result = { data: null, error: null }
+  const result = { data: null, error: null, totalCount: null }
   await API.get(`/director`, {
     params: {
       pageSize: pageSize,

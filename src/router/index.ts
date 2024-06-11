@@ -89,13 +89,43 @@ const router = createRouter({
     },
     {
       path: '/admin/models/film/:id/edit',
-      name: 'edit-model',
+      name: 'edit-film',
       component: () => import('../pages/_admin/edit/EditFilm.vue')
     },
     {
       path: '/admin/models/film/create',
-      name: 'create-model',
+      name: 'create-film',
       component: () => import('../pages/_admin/edit/EditFilm.vue')
+    },
+    {
+      path: '/admin/models/series/:id/edit',
+      name: 'edit-series',
+      component: () => import('../pages/_admin/edit/EditSeries.vue')
+    },
+    {
+      path: '/admin/models/series/create',
+      name: 'create-series',
+      component: () => import('../pages/_admin/edit/EditSeries.vue')
+    },
+    {
+      path: '/admin/models/actor/:id/edit',
+      name: 'edit-actor',
+      component: () => import('../pages/_admin/edit/EditActor.vue')
+    },
+    {
+      path: '/admin/models/actor/create',
+      name: 'create-actor',
+      component: () => import('../pages/_admin/edit/EditActor.vue')
+    },
+    {
+      path: '/admin/models/director/:id/edit',
+      name: 'edit-director',
+      component: () => import('../pages/_admin/edit/EditDirector.vue')
+    },
+    {
+      path: '/admin/models/director/create',
+      name: 'create-director',
+      component: () => import('../pages/_admin/edit/EditDirector.vue')
     },
     {
       path: '/admin/login',
