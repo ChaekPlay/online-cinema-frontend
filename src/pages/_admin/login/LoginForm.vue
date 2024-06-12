@@ -16,6 +16,7 @@
     </div>
 </template>
 <script setup lang="ts">
+import router from '@/router';
 import { useUserStore } from '@/store/UserStore';
 import { ref } from 'vue';
 
@@ -27,7 +28,8 @@ const credentials = ref({
 })
 
 async function login() {
-    await userStore.login(credentials.value.email)
+    if (await userStore.login(credentials.value.email, credentials.value.password))
+        router.replace('/profile');
 }
 </script>
 <style scoped>

@@ -23,7 +23,8 @@ export function convertUser(user: any) {
     id: user.id,
     name: user.name,
     email: user.email,
-    phoneNumber: user.phoneNumber,
-    password: user.password
+    phoneNumber: user.phone,
+    password: user.password,
+    profileImageURL: user.profileImageURL
   })
 }

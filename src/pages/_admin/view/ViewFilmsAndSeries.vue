@@ -16,7 +16,9 @@
             <div class="model-grid" v-if="activeIndex == 0">
                 <ModelCard v-for="model in modelObjects" :key="model.id" :objectid="model.id"
                     @click="$router.push({ name: 'edit-series', params: { id: model.id } })">
-                    <template #card-title>{{ model.title }}</template>
+                    <template #card-title> <img :src="model.previewImageURL" alt="">
+                        <p>{{ model.title }}</p>
+                    </template>
                     <template #card-content>
                         <p>ID: {{ model.id }}</p>
                         <p>Жанры: {{ model.genres?.map((g: any) => g.name).join(', ') ?? '' }}</p>
@@ -28,11 +30,13 @@
             <div class="model-grid" v-if="activeIndex == 1">
                 <ModelCard v-for="model in modelObjects" :key="model.id" :objectid="model.id"
                     @click="$router.push({ name: 'edit-film', params: { id: model.id } })">
-                    <template #card-title>{{ model.title }}</template>
+                    <template #card-title><img :src="model.previewImageURL" alt="">
+                        <p>{{ model.title }}</p>
+                    </template>
                     <template #card-content>
                         <p>ID: {{ model.id }}</p>
                         <p>Жанры: {{ model.genres?.map((g: any) => g.name).join(', ') ?? '' }}</p>
-                        <p>Описание: {{ model.description }}</p>
+                        <p>Описание: {{ model.description?.substring(0, 100) + '...' ?? '' }}</p>
                         <p>Дата выхода: {{ getLocalDate(model.releaseDate) }}</p>
                     </template>
                 </ModelCard>
@@ -40,10 +44,12 @@
             <div class="model-grid" v-if="activeIndex == 2">
                 <ModelCard v-for="model in modelObjects" :key="model.id" :objectid="model.id"
                     @click="$router.push({ name: 'edit-actor', params: { id: model.id } })">
-                    <template #card-title>{{ model.name }}</template>
+                    <template #card-title><img :src="model.actorImageURL" alt="">
+                        <p>{{ model.name }}</p>
+                    </template>
                     <template #card-content>
                         <p>ID: {{ model.id }}</p>
-                        <p>Биография: {{ model.information }}</p>
+                        <p>Биография: {{ model.information?.substring(0, 100) + '...' ?? ' ' }}</p>
                         <p>Дата рождения: {{ getLocalDate(model.birthdate) }}</p>
                     </template>
                 </ModelCard>
@@ -51,10 +57,12 @@
             <div class="model-grid" v-if="activeIndex == 3">
                 <ModelCard v-for="model in modelObjects" :key="model.id" :objectid="model.id"
                     @click="$router.push({ name: 'edit-director', params: { id: model.id } })">
-                    <template #card-title>{{ model.name }}</template>
+                    <template #card-title><img :src="model.directorImageURL ?? 'https://placehold.it/300x400'" alt="">
+                        <p>{{ model.title }}</p>
+                    </template>
                     <template #card-content>
                         <p>ID: {{ model.id }}</p>
-                        <p>Биография: {{ model.information }}</p>
+                        <p>Биография: {{ model.information.substring(0, 100) + '...' }}</p>
                         <p>Дата рождения: {{ getLocalDate(model.birthdate) }}</p>
                     </template>
                 </ModelCard>
@@ -178,5 +186,12 @@ async function search() {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 1rem;
+}
+
+.model-grid img {
+    width: 300px;
+    height: 600px;
+    object-fit: cover;
+    overflow: hidden;
 }
 </style>

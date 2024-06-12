@@ -5,13 +5,13 @@ export default class Director {
   name!: string
   birthdate!: Date
   information!: string
-  imageURL?: string
+  directorImageURL?: string
 
-  constructor({ id, name, birthdate, information, imageURL }: Director) {
+  constructor({ id, name, birthdate, information, directorImageURL: imageURL }: Director) {
     this.id = id
     this.name = name
     this.birthdate = birthdate
     this.information = information
-    this.imageURL = imageURL
+    this.directorImageURL = imageURL
   }
 }

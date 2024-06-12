@@ -26,7 +26,8 @@ export function convertDirectors(directors: any) {
       id: director.id,
       name: director.name,
       birthdate: new Date(director.birthdate),
-      information: director.information
+      information: director.information,
+      directorImageURL: director.directorImageURL
     })
   })
 }

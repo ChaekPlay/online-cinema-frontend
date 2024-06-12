@@ -11,7 +11,7 @@ export async function registerUser(newUser: User) {
       email: newUser.email,
       phone: newUser.phoneNumber,
       password: newUser.password,
-      profileImageURL: ''
+      profileImageURL: newUser.profileImageURL
     },
     {
       params: {

@@ -8,13 +8,15 @@ export default class User {
   phoneNumber!: string
   password!: string
   userRole?: UserRole
+  profileImageURL?: string
 
-  constructor({ id, name, email, phoneNumber, password, userRole }: User) {
+  constructor({ id, name, email, phoneNumber, password, userRole, profileImageURL }: User) {
     this.id = id
     this.name = name
     this.email = email
     this.phoneNumber = phoneNumber
     this.password = password
     this.userRole = userRole
+    this.profileImageURL = profileImageURL
   }
 }

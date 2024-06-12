@@ -48,7 +48,7 @@ export function convertInfo(movie: any) {
       })
     }),
     director: movie.director,
-    seasons: movie.seasons ?? {}
+    seasons: movie.seasons ?? null
   })
   return result
 }

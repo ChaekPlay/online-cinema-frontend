@@ -7,7 +7,8 @@ export async function uploadFile(file: File) {
   await API.post('/files/upload', fd, {
     headers: {
       'Content-Type': 'multipart/form-data'
-    }
+    },
+    auth: { username: 'test@test.test', password: '123' }
   })
     .then((response) => {
       result.data = response.data
@@ -20,5 +21,5 @@ export async function uploadFile(file: File) {
 }
 
 export function getImageURL(data: any) {
-    return data.url;
+  return data.url
 }

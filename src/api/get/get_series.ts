@@ -38,10 +38,12 @@ export function convertSeries(series: any) {
       title: movie.title,
       releaseDate: new Date(movie.releaseDate),
       genres: movie.genres,
-      previewImageURL: movie.poster ?? null,
+      previewImageURL: movie.previewImageURL ?? null,
       description: movie.description,
       rating: movie.averageRating,
-      seasons: movie.seasons.length
+      seasons: movie.seasons.length,
+      actors: movie.actors,
+      director: movie.director
     })
   })
 }
