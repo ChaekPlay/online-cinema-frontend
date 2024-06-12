@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
+import { useUserStore } from './store/UserStore';
+
+const userStore = useUserStore();
 </script>
 
 <template>
@@ -8,9 +11,9 @@ import { RouterLink, RouterView } from 'vue-router'
     <nav>
       <RouterLink to="/" class="headline-sm">Главная</RouterLink>
       <RouterLink to="/watched-movies" class="headline-sm">Список просмотренного</RouterLink>
-      <RouterLink to="/admin/login" class="headline-sm">Авторизация</RouterLink>
-      <RouterLink to="/admin/register" class="headline-sm">Регистрация</RouterLink>
-      <RouterLink to="/admin/profile" class="headline-sm">Профиль</RouterLink>
+      <RouterLink to="/login" class="headline-sm" v-if="userStore.isEmpty()">Авторизация</RouterLink>
+      <RouterLink to="/register" class="headline-sm" v-if="userStore.isEmpty()">Регистрация</RouterLink>
+      <RouterLink to="/profile" class="headline-sm" v-if="!userStore.isEmpty()">Профиль</RouterLink>
     </nav>
   </header>
   <RouterView />

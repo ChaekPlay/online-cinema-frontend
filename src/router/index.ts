@@ -128,17 +128,17 @@ const router = createRouter({
       component: () => import('../pages/_admin/edit/EditDirector.vue')
     },
     {
-      path: '/admin/login',
+      path: '/login',
       name: 'login',
       component: () => import('../pages/_admin/login/LoginForm.vue')
     },
     {
-      path: '/admin/register',
+      path: '/register',
       name: 'register',
       component: () => import('../pages/_admin/register/RegisterForm.vue')
     },
     {
-      path: '/admin/profile',
+      path: '/profile',
       name: 'profile',
       component: () => import('../pages/_admin/profile/UserProfile.vue')
     }

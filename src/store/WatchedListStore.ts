@@ -5,8 +5,12 @@ import { ref } from 'vue'
 export const useWatchedListStore = defineStore('watchedList', () => {
   const watchedList = ref([] as MediaContent[])
 
-  if (localStorage.getItem('watched')) {
-    watchedList.value = JSON.parse(localStorage.getItem('watched')!).watchedList
+  if (
+    localStorage.getItem('watched') &&
+    localStorage.getItem('watched') != undefined &&
+    localStorage.getItem('watched') != 'undefined'
+  ) {
+    watchedList.value = JSON.parse(localStorage.getItem('watched')!).watchedList ?? []
   }
   function addToWatchedList(movie: MediaContent) {
     watchedList.value.push(movie)

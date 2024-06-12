@@ -15,7 +15,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import MovieInfo from '@/models/Movie';
+import MovieInfo from '@/models/MediaContent';
 import { useWatchedListStore } from '@/store/WatchedListStore';
 
 
