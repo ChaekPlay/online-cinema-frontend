@@ -1,6 +1,6 @@
 <template>
     <div class="search-result-card">
-        <img :src="content.posterURI ?? 'https://placehold.it/200x300'" alt="Постер">
+        <img width="200" height="400" :src="content.previewImageURL ?? 'https://placehold.it/200x300'" alt="Постер">
         <div class="search-result-card-content">
             <div class="search-result-card-content-header">
                 <div class="search-result-card-content-header-info">
@@ -9,7 +9,7 @@
                 </div>
                 <span class="search-result-card-rating">{{ content.rating ?? '--' }}</span>
             </div>
-            <p>{{ content.description }}
+            <p>{{ content.description.substring(0, 100) + '...' }}
             </p>
             <p>{{ parseGenres(content.genres) }}</p>
             <p v-if="content.seasons">Количество сезонов: {{ content.seasons }}</p>

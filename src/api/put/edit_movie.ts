@@ -8,9 +8,10 @@ export async function editMovie(movie: MediaContent) {
     description: movie.description,
     releaseDate: movie.releaseDate.toISOString(),
     resourceLink: null,
-    cost: 0
+    cost: 0,
+    previewImageURL: movie.previewImageURL ?? null
   }
-  console.log(JSON.stringify(formData))
+  console.log(formData)
   const params = {
     id: movie.id,
     genresIds: movie.genres.map((genre: any) => genre.id).join(','),

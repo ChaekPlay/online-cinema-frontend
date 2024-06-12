@@ -6,10 +6,11 @@ import { RouterLink, RouterView } from 'vue-router'
   <header>
     <RouterLink to="/" class="logo" href="">Фильмотека</RouterLink>
     <nav>
-      <RouterLink to="/" class="headline-md">Главная</RouterLink>
-      <RouterLink to="/watched-movies" class="headline-md">Список просмотренного</RouterLink>
-      <RouterLink to="/admin/login" class="headline-md">Авторизация</RouterLink>
-      <RouterLink to="/admin/register" class="headline-md">Регистрация</RouterLink>
+      <RouterLink to="/" class="headline-sm">Главная</RouterLink>
+      <RouterLink to="/watched-movies" class="headline-sm">Список просмотренного</RouterLink>
+      <RouterLink to="/admin/login" class="headline-sm">Авторизация</RouterLink>
+      <RouterLink to="/admin/register" class="headline-sm">Регистрация</RouterLink>
+      <RouterLink to="/admin/profile" class="headline-sm">Профиль</RouterLink>
     </nav>
   </header>
   <RouterView />

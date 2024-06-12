@@ -34,7 +34,7 @@ let content = ref(new MediaContent({
     title: "",
     releaseDate: new Date(),
     genres: [],
-    posterURI: "",
+    previewImageURL: "",
     description: "",
     rating: 0,
     actors: [],

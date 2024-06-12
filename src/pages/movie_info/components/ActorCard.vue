@@ -1,9 +1,9 @@
 <template>
     <div class="actor-card">
-        <img src="https://placehold.it/200x300" alt="фото">
+        <img width="200" height="300" :src="props.actor?.actorImageURL ?? 'https://placehold.it/200x300'" alt="фото">
         <div class="actor-description">
             <h4 class="txt-body-lg">{{ props.actor?.name }}</h4>
-            <p class="txt-body-md">Роль</p>
+            <p class="txt-body-md">Актер</p>
         </div>
     </div>
 </template>
@@ -21,7 +21,7 @@
 }
 
 .actor-card img {
-    object-fit: contain;
+    object-fit: cover;
 }
 
 .actor-description {

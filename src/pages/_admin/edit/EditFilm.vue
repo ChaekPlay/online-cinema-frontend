@@ -37,6 +37,12 @@
                                 director.name }}</option>
                     </select>
                 </div>
+                <div class="input-field">
+                    <label for="imageURL">Изображение</label>
+                    <p>Текущее изображение: <img width="200" height="200" :src="film.previewImageURL ?? ''"
+                            alt="изображение"></p>
+                    <input type="file" @change="onFileChange" name="imageURL" id="imageURL">
+                </div>
             </template>
         </EditModel>
     </div>
@@ -57,6 +63,7 @@ import { createMovie } from '@/api/post/create_movie';
 import Director from '@/models/Director';
 import { convertDirectors, getDirectors } from '@/api/get/get_directors';
 import { deleteMovie } from '@/api/delete/delete_movie';
+import { getImageURL, uploadFile } from '@/api/post/upload_file';
 
 let film_id: string = router.currentRoute.value.params.id?.toString() ?? null;
 let film = ref(new MediaContent({
@@ -64,7 +71,7 @@ let film = ref(new MediaContent({
     title: "",
     releaseDate: new Date(),
     genres: [],
-    posterURI: "",
+    previewImageURL: "",
     description: "",
     rating: 0,
     actors: [],
@@ -86,6 +93,7 @@ let date = ref({
     month: 0,
     day: 0
 });
+let current_file = ref(new File([], ""));
 
 onMounted(async () => {
     let res = {
@@ -147,12 +155,20 @@ async function getAvailableDirectors() {
 }
 
 async function createFilm() {
+
+    let res = await uploadFile(current_file.value);
+    let url = getImageURL(res.data);
+    console.log(url);
+    film.value.previewImageURL = url;
     film.value.releaseDate = new Date(date.value.year, date.value.month, date.value.day);
     await createMovie(film.value);
     router.push('/admin/models');
 }
 
 async function editFilm() {
+    let res = await uploadFile(current_file.value);
+    let url = getImageURL(res.data);
+    film.value.previewImageURL = url;
     film.value.releaseDate = new Date(date.value.year, date.value.month, date.value.day);
     await editMovie(film.value);
     router.push('/admin/models');
@@ -161,6 +177,16 @@ async function editFilm() {
 async function deleteFilm() {
     await deleteMovie(film_id);
     router.push('/admin/models');
+}
+
+function onFileChange(event: any) {
+    const file: File = event.target.files[0];
+    if (file.size > 1048576) {
+        alert("Файл слишком большой, размер не должен превышать 1 МБ");
+        event.target.value = "";
+        return;
+    }
+    current_file.value = file;
 }
 
 </script>

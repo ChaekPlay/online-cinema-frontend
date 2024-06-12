@@ -8,7 +8,7 @@ export default class MediaContent {
   id!: UUID
   title!: string
   description!: string
-  posterURI?: string
+  previewImageURL?: string
   genres!: Genre[]
   actors!: Actor[]
   director!: Director
@@ -21,7 +21,7 @@ export default class MediaContent {
     description,
     actors,
     genres,
-    posterURI,
+    previewImageURL,
     director,
     rating,
     releaseDate,
@@ -30,7 +30,7 @@ export default class MediaContent {
     this.id = id
     this.title = title
     this.description = description
-    this.posterURI = posterURI
+    this.previewImageURL = previewImageURL
     this.actors = actors
     this.genres = genres
     this.director = director

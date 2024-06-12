@@ -35,15 +35,16 @@ export function convertInfo(movie: any) {
     title: movie.title,
     releaseDate: new Date(movie.releaseDate),
     genres: movie.genres,
-    posterURI: movie.poster ?? 'https://placehold.it/500x850',
+    previewImageURL: movie.previewImageURL ?? 'https://placehold.it/500x850',
     description: movie.description,
-    rating: movie.ratings[0],
+    rating: movie.averageRating ?? 0,
     actors: movie.actors.map((actor: any) => {
       return new Actor({
         id: actor.id,
         name: actor.name,
         birthdate: new Date(actor.birthdate),
-        information: actor.information
+        information: actor.information,
+        actorImageURL: actor.actorImageURL
       })
     }),
     director: movie.director,

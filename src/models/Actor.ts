@@ -7,14 +7,14 @@ export default class Actor {
   birthdate!: Date
   information!: string
   films?: MovieRole[]
-  imageURL?: string
+  actorImageURL?: string
 
-  constructor({ id, name, birthdate, information, films, imageURL }: Actor) {
+  constructor({ id, name, birthdate, information, films, actorImageURL: imageURL }: Actor) {
     this.id = id
     this.name = name
     this.birthdate = birthdate
     this.information = information
     this.films = films ?? []
-    this.imageURL = imageURL
+    this.actorImageURL = imageURL
   }
 }

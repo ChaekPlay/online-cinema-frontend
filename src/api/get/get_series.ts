@@ -38,7 +38,7 @@ export function convertSeries(series: any) {
       title: movie.title,
       releaseDate: new Date(movie.releaseDate),
       genres: movie.genres,
-      posterURI: movie.poster ?? null,
+      previewImageURL: movie.poster ?? null,
       description: movie.description,
       rating: movie.averageRating,
       seasons: movie.seasons.length

@@ -1,6 +1,6 @@
 <template>
     <section class="movie-info view">
-        <img class="poster" src="https://placehold.it/500x850" alt="постер">
+        <img class="poster" width="500" height="850" :src="movie.previewImageURL" alt="постер">
         <div class="movie-info-container">
             <div class="movie-info-actions">
                 <div class="movie-action-bar">
@@ -15,7 +15,7 @@
                 </div>
                 <div class="movie-rating">
                     <h3 class="headline-lg">Общая оценка:</h3>
-                    <p class="display-lg">9.1</p>
+                    <p class="display-lg">{{ movie.rating }}</p>
                     <button class="btn btn-glass label-lg overlay" @click="$router.push('reviews')">Оценки и
                         рецензии</button>
                 </div>
@@ -130,9 +130,9 @@ import { useWatchedListStore } from '@/store/WatchedListStore';
 let movie = ref(new MediaContent({
     id: 0,
     title: "",
-    year: 0,
+    releaseDate: new Date(),
     genres: [],
-    posterURI: "",
+    previewImageURL: "",
     description: "",
     rating: 0,
     actors: [],

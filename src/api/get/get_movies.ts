@@ -41,7 +41,7 @@ export function convertMovies(movies: any) {
       actors: movie.actors,
       genres: movie.genres,
       director: movie.director,
-      posterURI: movie.poster ?? null,
+      previewImageURL: movie.previewImageURL ?? null,
       description: movie.description,
       rating: movie.averageRating
     })

@@ -1,6 +1,7 @@
 <template>
     <div class="actor-info view">
-        <img class="poster" src="https://placehold.it/500x850" alt="постер">
+        <img class="poster" width="500" height="850" :src="actor.actorImageURL ?? 'https://placehold.it/500x850'"
+            alt="постер">
         <div class="actor-info-container">
             <div class="actor-description">
                 <h2 class="headline-lg">{{ actor.name }}</h2>
@@ -33,7 +34,6 @@ let actor = ref(new Actor({
 }))
 async function getActor(id: string) {
     let res = await getActorInfo(id);
-    console.log(res);
     // TODO: get actor's movie roles
     try {
         actor.value = convertActorInfo(res.data);

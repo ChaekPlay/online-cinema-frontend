@@ -26,7 +26,8 @@ export function convertActors(actors: any) {
       id: actor.id,
       name: actor.name,
       birthdate: new Date(actor.birthdate),
-      information: actor.information
+      information: actor.information,
+      actorImageURL: actor.actorImageURL
     })
   })
 }
