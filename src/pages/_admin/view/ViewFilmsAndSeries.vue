@@ -15,7 +15,7 @@
                     alt="создать"></button>
             <div class="model-grid" v-if="activeIndex == 0">
                 <ModelCard v-for="model in modelObjects" :key="model.id" :objectid="model.id"
-                    @click="$router.push({ name: 'edit-series', params: { id: model.id } })">
+                    @click="$router.push({ name: 'edit-media', params: { id: model.id, media: 'series' } })">
                     <template #card-title> <img :src="model.previewImageURL" alt="">
                         <p>{{ model.title }}</p>
                     </template>
@@ -29,7 +29,7 @@
             </div>
             <div class="model-grid" v-if="activeIndex == 1">
                 <ModelCard v-for="model in modelObjects" :key="model.id" :objectid="model.id"
-                    @click="$router.push({ name: 'edit-film', params: { id: model.id } })">
+                    @click="$router.push({ name: 'edit-media', params: { id: model.id, media: 'movie' } })">
                     <template #card-title><img :src="model.previewImageURL" alt="">
                         <p>{{ model.title }}</p>
                     </template>
@@ -43,7 +43,7 @@
             </div>
             <div class="model-grid" v-if="activeIndex == 2">
                 <ModelCard v-for="model in modelObjects" :key="model.id" :objectid="model.id"
-                    @click="$router.push({ name: 'edit-actor', params: { id: model.id } })">
+                    @click="$router.push({ name: 'edit-person', params: { id: model.id, person: 'actor' } })">
                     <template #card-title><img :src="model.actorImageURL" alt="">
                         <p>{{ model.name }}</p>
                     </template>
@@ -56,14 +56,23 @@
             </div>
             <div class="model-grid" v-if="activeIndex == 3">
                 <ModelCard v-for="model in modelObjects" :key="model.id" :objectid="model.id"
-                    @click="$router.push({ name: 'edit-director', params: { id: model.id } })">
+                    @click="$router.push({ name: 'edit-person', params: { id: model.id, person: 'director' } })">
                     <template #card-title><img :src="model.directorImageURL ?? 'https://placehold.it/300x400'" alt="">
                         <p>{{ model.title }}</p>
                     </template>
                     <template #card-content>
                         <p>ID: {{ model.id }}</p>
-                        <p>Биография: {{ model.information.substring(0, 100) + '...' }}</p>
+                        <p>Биография: {{ model.information?.substring(0, 100) + '...' ?? '' }}</p>
                         <p>Дата рождения: {{ getLocalDate(model.birthdate) }}</p>
+                    </template>
+                </ModelCard>
+            </div>
+            <div class="model-grid" v-if="activeIndex == 4">
+                <ModelCard v-for="model in modelObjects" :key="model.id" :objectid="model.id"
+                    @click="$router.push({ name: 'edit-genre', params: { id: model.id } })">
+                    <template #card-title>{{ model.name }}</template>
+                    <template #card-content>
+                        <p>ID: {{ model.id }}</p>
                     </template>
                 </ModelCard>
             </div>
@@ -84,6 +93,7 @@ import { convertActors, getActors } from '../../../api/get/get_actors';
 import { convertDirectors, getDirectors } from '../../../api/get/get_directors';
 import ModelCard from '../templates/ModelCard.vue';
 import router from '@/router';
+import { convertGenres, getGenres } from '@/api/get/get_genres';
 
 let models = [
     {
@@ -101,6 +111,10 @@ let models = [
     {
         id: 3,
         name: 'Режиссеры'
+    },
+    {
+        id: 4,
+        name: 'Жанры'
     }
 ]
 let activeIndex = ref(0);
@@ -127,16 +141,17 @@ async function switchIndex(index: number) {
 function createModel() {
     switch (activeIndex.value) {
         case 0:
-            router.push({ name: 'create-series' });
-            break;
         case 1:
-            router.push({ name: 'create-film' });
+            router.push({ name: 'create-media' });
             break;
         case 2:
             router.push({ name: 'create-actor' });
             break;
         case 3:
             router.push({ name: 'create-director' });
+            break;
+        case 4:
+            router.push({ name: 'create-genre' });
             break;
         default:
             break;
@@ -165,6 +180,10 @@ async function search() {
                 res = await getDirectors(pageSize, currentPage.value - 1);
                 console.log(res);
                 modelObjects.value = convertDirectors(res.data);
+                break;
+            case 4:
+                res = await getGenres(pageSize, currentPage.value - 1);
+                modelObjects.value = convertGenres(res.data);
                 break;
             default:
                 break;

@@ -88,44 +88,34 @@ const router = createRouter({
       component: () => import('../pages/_admin/view/ViewFilmsAndSeries.vue')
     },
     {
-      path: '/admin/models/film/:id/edit',
-      name: 'edit-film',
-      component: () => import('../pages/_admin/edit/EditFilm.vue')
+      path: '/admin/models/:media/:id/edit',
+      name: 'edit-media',
+      component: () => import('../pages/_admin/edit/EditMedia.vue')
     },
     {
-      path: '/admin/models/film/create',
-      name: 'create-film',
-      component: () => import('../pages/_admin/edit/EditFilm.vue')
+      path: '/admin/models/:media/create',
+      name: 'create-media',
+      component: () => import('../pages/_admin/edit/EditMedia.vue')
     },
     {
-      path: '/admin/models/series/:id/edit',
-      name: 'edit-series',
-      component: () => import('../pages/_admin/edit/EditSeries.vue')
+      path: '/admin/models/:person/:id/edit',
+      name: 'edit-person',
+      component: () => import('../pages/_admin/edit/EditPerson.vue')
     },
     {
-      path: '/admin/models/series/create',
-      name: 'create-series',
-      component: () => import('../pages/_admin/edit/EditSeries.vue')
+      path: '/admin/models/:person/create',
+      name: 'create-person',
+      component: () => import('../pages/_admin/edit/EditPerson.vue')
     },
     {
-      path: '/admin/models/actor/:id/edit',
-      name: 'edit-actor',
-      component: () => import('../pages/_admin/edit/EditActor.vue')
+      path: '/admin/models/genre/:id/edit',
+      name: 'edit-genre',
+      component: () => import('../pages/_admin/edit/EditGenre.vue')
     },
     {
-      path: '/admin/models/actor/create',
-      name: 'create-actor',
-      component: () => import('../pages/_admin/edit/EditActor.vue')
-    },
-    {
-      path: '/admin/models/director/:id/edit',
-      name: 'edit-director',
-      component: () => import('../pages/_admin/edit/EditDirector.vue')
-    },
-    {
-      path: '/admin/models/director/create',
-      name: 'create-director',
-      component: () => import('../pages/_admin/edit/EditDirector.vue')
+      path: '/admin/models/genre/create',
+      name: 'create-genre',
+      component: () => import('../pages/_admin/edit/EditGenre.vue')
     },
     {
       path: '/login',

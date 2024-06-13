@@ -43,6 +43,9 @@
                             alt="изображение"></p>
                     <input type="file" @change="onFileChange" name="imageURL" id="imageURL">
                 </div>
+                <button :disabled="!loaded || media_type != 'series' || !film_id" class="btn btn-primary"
+                    @click.prevent="$router.push({ name: 'view-seasons', params: { id: film_id } })">Сезоны</button>
+                <p v-if="!film_id && media_type == 'series'">Создайте сериал, прежде, чем перейти к созданию сезонов</p>
             </template>
         </EditModel>
     </div>
@@ -50,7 +53,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import EditModel from '../templates/EditModel.vue';
-import getMovieInfo, { convertInfo } from '@/api/get/get_movie_info';
+import getMovieInfo, { convertInfo, getSeriesInfo } from '@/api/get/get_movie_info';
 import router from '@/router';
 import MediaContent from '@/models/MediaContent';
 import SelectPicker from '@/components/SelectPicker.vue';
@@ -64,7 +67,10 @@ import Director from '@/models/Director';
 import { convertDirectors, getDirectors } from '@/api/get/get_directors';
 import { deleteMovie } from '@/api/delete/delete_movie';
 import { getImageURL, uploadFile } from '@/api/post/upload_file';
-
+import { putSeries } from '@/api/put/put_series';
+import { deleteSeries } from '@/api/delete/delete_series';
+import { postSeries } from '@/api/post/post_series';
+let media_type = router.currentRoute.value.params.media?.toString() ?? null;
 let film_id: string = router.currentRoute.value.params.id?.toString() ?? null;
 let film = ref(new MediaContent({
     id: 0,
@@ -94,6 +100,7 @@ let date = ref({
     day: 0
 });
 let current_file = ref(new File([], ""));
+let needs_upload = ref(false);
 
 onMounted(async () => {
     let res = {
@@ -104,7 +111,10 @@ onMounted(async () => {
         await getAvailableActors();
         await getAvailableDirectors();
         if (film_id == null) return
-        res = await getMovieInfo(film_id);
+        if (media_type == "film")
+            res = await getMovieInfo(film_id);
+        else
+            res = await getSeriesInfo(film_id);
         film.value = convertInfo(res.data);
         console.log(film.value);
         date.value.day = film.value.releaseDate?.getDate() ?? 0;
@@ -155,27 +165,40 @@ async function getAvailableDirectors() {
 }
 
 async function createFilm() {
-
-    let res = await uploadFile(current_file.value);
-    let url = getImageURL(res.data);
-    console.log(url);
-    film.value.previewImageURL = url;
+    if (needs_upload.value) {
+        let res = await uploadFile(current_file.value);
+        let url = getImageURL(res.data);
+        console.log(url);
+        film.value.previewImageURL = url;
+    }
     film.value.releaseDate = new Date(date.value.year, date.value.month, date.value.day);
-    await createMovie(film.value);
+    if (media_type == "film")
+        await createMovie(film.value);
+    else
+        await postSeries(film.value);
     router.push('/admin/models');
 }
 
 async function editFilm() {
-    let res = await uploadFile(current_file.value);
-    let url = getImageURL(res.data);
-    film.value.previewImageURL = url;
+    if (needs_upload.value) {
+        let res = await uploadFile(current_file.value);
+        let url = getImageURL(res.data);
+        film.value.previewImageURL = url;
+    }
     film.value.releaseDate = new Date(date.value.year, date.value.month, date.value.day);
-    await editMovie(film.value);
+    if (media_type == "film")
+        await editMovie(film.value);
+    else
+        await putSeries(film.value);
     router.push('/admin/models');
 }
 
 async function deleteFilm() {
-    await deleteMovie(film_id);
+    if (!confirm(`Вы уверены, что хотите удалить ${media_type == "movie" ? "фильм" : "сериал"} ?`)) return;
+    if (media_type == "film")
+        await deleteMovie(film_id);
+    else
+        await deleteSeries(film_id);
     router.push('/admin/models');
 }
 
@@ -187,6 +210,7 @@ function onFileChange(event: any) {
         return;
     }
     current_file.value = file;
+    needs_upload.value = true;
 }
 
 </script>

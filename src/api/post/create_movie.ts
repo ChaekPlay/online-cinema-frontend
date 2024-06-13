@@ -9,6 +9,7 @@ export async function createMovie(movie: any) {
       title: movie.title,
       description: movie.description,
       releaseDate: movie.releaseDate,
+      previewImageURL: movie.previewImageURL,
       resourceLink: '',
       cost: 0
     },
