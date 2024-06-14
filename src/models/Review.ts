@@ -1,14 +1,22 @@
-import type { ReviewType } from "./ReviewType"
+import type { UUID } from 'crypto'
+import { ReviewType } from './ReviewType'
 
 export default class Review {
-    id!: number
-    title!: string
-    text!: string
-    type!: ReviewType
-    constructor({ id, title, text, type}: Review) {
-        this.id = id
-        this.title = title
-        this.text = text
-        this.type = type
+  id!: UUID
+  rating!: number
+  comment!: string
+  constructor({ id, comment, rating }: Review) {
+    this.id = id
+    this.comment = comment
+    this.rating = rating
+  }
+  public get type(): ReviewType {
+    if (this.rating < 3) {
+      return ReviewType.NEGATIVE
+    } else if (this.rating < 6) {
+      return ReviewType.NEUTRAL
+    } else {
+      return ReviewType.POSITIVE
     }
+  }
 }

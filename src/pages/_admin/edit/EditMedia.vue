@@ -43,9 +43,20 @@
                             alt="изображение"></p>
                     <input type="file" @change="onFileChange" name="imageURL" id="imageURL">
                 </div>
-                <button :disabled="!loaded || media_type != 'series' || !film_id" class="btn btn-primary"
-                    @click.prevent="$router.push({ name: 'view-seasons', params: { id: film_id } })">Сезоны</button>
-                <p v-if="!film_id && media_type == 'series'">Создайте сериал, прежде, чем перейти к созданию сезонов</p>
+                <div class="input-group">
+                    <div class="input-field" v-if="loaded && media_type == 'series'">
+                        <button :disabled="!film_id" class="btn btn-primary"
+                            @click.prevent="$router.push({ name: 'view-seasons', params: { id: film_id } })">Сезоны</button>
+                        <p v-if="!film_id">Создайте сериал, прежде, чем перейти к созданию
+                            сезонов</p>
+                    </div>
+                    <div class="input-field">
+                        <button :disabled="!loaded || !film_id" class="btn btn-primary"
+                            @click.prevent="$router.push({ name: 'view-ratings', params: { id: film_id } })">Рецензии</button>
+                        <p v-if="!film_id">Создайте {{ media_type == 'movie' ? 'фильм' : 'сериал' }}, прежде, чем
+                            перейти к рецензиям</p>
+                    </div>
+                </div>
             </template>
         </EditModel>
     </div>

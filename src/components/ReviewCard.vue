@@ -1,8 +1,8 @@
 <template>
-    <div class="review-card" :style="{'background': reviewTypeDictionary[content.type]}">
-        <h3 class="headline-lg">{{ content.title }}</h3>
+    <div class="review-card" :style="{ 'background': reviewTypeDictionary[content.type] }">
+        <h3 class="headline-lg"> Оценка: {{ content.rating }}</h3>
         <hr>
-        <p class="txt-body-lg">{{ content.text }}</p>
+        <p class="txt-body-lg">{{ content.comment }}</p>
     </div>
 </template>
 <style scoped>
@@ -12,10 +12,11 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    box-shadow: 0px 1px 2px rgba(0,0,0,30%), 0 1px 3px 1px rgba(0,0,0,15%);
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 30%), 0 1px 3px 1px rgba(0, 0, 0, 15%);
 }
+
 .review-card hr {
-    border:none;
+    border: none;
     border: 1px solid var(--outline);
 }
 </style>

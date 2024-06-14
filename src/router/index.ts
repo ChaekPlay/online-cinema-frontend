@@ -98,6 +98,51 @@ const router = createRouter({
       component: () => import('../pages/_admin/edit/EditMedia.vue')
     },
     {
+      path: '/admin/models/:media/:id/ratings',
+      name: 'view-ratings',
+      component: () => import('../pages/_admin/view/ViewRatings.vue')
+    },
+    {
+      path: '/admin/models/:media/:id/ratings/:rating_id/edit',
+      name: 'edit-rating',
+      component: () => import('../pages/_admin/edit/EditRating.vue')
+    },
+    {
+      path: '/admin/models/:media/:id/ratings/create',
+      name: 'create-rating',
+      component: () => import('../pages/_admin/edit/EditRating.vue')
+    },
+    {
+      path: '/admin/models/series/:id/seasons',
+      name: 'view-seasons',
+      component: () => import('../pages/_admin/view/ViewSeasons.vue')
+    },
+    {
+      path: '/admin/models/series/:id/seasons/:season_id/edit',
+      name: 'edit-season',
+      component: () => import('../pages/_admin/edit/EditSeason.vue')
+    },
+    {
+      path: '/admin/models/series/:id/seasons/:season_id/create',
+      name: 'create-season',
+      component: () => import('../pages/_admin/edit/EditSeason.vue')
+    },
+    {
+      path: '/admin/models/series/:id/seasons/:season_id/episodes',
+      name: 'view-episodes',
+      component: () => import('../pages/_admin/view/ViewEpisodes.vue')
+    },
+    {
+      path: '/admin/models/series/:id/seasons/:season_id/episodes/:episode_id/edit',
+      name: 'edit-episode',
+      component: () => import('../pages/_admin/edit/EditEpisode.vue')
+    },
+    {
+      path: '/admin/models/series/:id/seasons/:season_id/episodes/:episode_id/create',
+      name: 'create-episode',
+      component: () => import('../pages/_admin/edit/EditEpisode.vue')
+    },
+    {
       path: '/admin/models/:person/:id/edit',
       name: 'edit-person',
       component: () => import('../pages/_admin/edit/EditPerson.vue')

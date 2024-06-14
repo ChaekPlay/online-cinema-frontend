@@ -3,10 +3,12 @@ export default class Episode {
   title!: string
   description!: string
   releaseDate!: Date
-  constructor({ id, title, description, releaseDate }: Episode) {
+  resourceLink?: string
+  constructor({ id, title, description, releaseDate, resourceLink }: Episode) {
     this.id = id
     this.title = title
     this.description = description
     this.releaseDate = releaseDate
+    this.resourceLink = resourceLink
   }
 }

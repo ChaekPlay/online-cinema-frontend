@@ -2,7 +2,7 @@ import Genre from '@/models/Genre'
 import { API } from '..'
 
 export async function getGenres(pageSize?: number, pageNumber?: number) {
-  const result = { data: null, error: null }
+  const result = { data: null, error: null, totalCount: null }
   await API.get(`/genre`, {
     params: {
       pageSize: pageSize ?? 1000,
@@ -11,6 +11,7 @@ export async function getGenres(pageSize?: number, pageNumber?: number) {
   })
     .then((response) => {
       result.data = response.data
+      result.totalCount = response.data.totalCount
     })
     .catch((error) => {
       console.log(error)

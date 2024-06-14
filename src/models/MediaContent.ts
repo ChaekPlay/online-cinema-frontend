@@ -15,6 +15,7 @@ export default class MediaContent {
   rating!: number
   releaseDate!: Date
   seasons?: Season[]
+  resourceLink?: string
   constructor({
     id,
     title,
@@ -25,7 +26,8 @@ export default class MediaContent {
     director,
     rating,
     releaseDate,
-    seasons
+    seasons,
+    resourceLink
   }: MediaContent) {
     this.id = id
     this.title = title
@@ -37,5 +39,6 @@ export default class MediaContent {
     this.rating = rating
     this.releaseDate = releaseDate
     this.seasons = seasons
+    this.resourceLink = resourceLink
   }
 }

@@ -46,6 +46,7 @@ import router from '@/router';
 import FilterPicker from './components/FilterPicker.vue';
 import SearchBar from '@/components/SearchBar.vue';
 import type MediaContent from '@/models/MediaContent';
+import { getLastPage } from '@/helpers/get_last_page';
 let data = reactive(
     {
         results: [] as MediaContent[],
@@ -84,7 +85,7 @@ async function getMoviesFromQuery(filters: any) {
     let res = (await getMovies(query, pageSize, currentPage.value - 1, filters));
     try {
         data.results = convertMovies(res.data);
-        page_last.value = ~~((res.totalCount ?? 0) / pageSize) + ((res.totalCount ?? 0) % pageSize == 0 ? 0 : 1);
+        page_last.value = getLastPage(res.totalCount ?? 0, pageSize);
     }
     catch {
         console.log(res.error);

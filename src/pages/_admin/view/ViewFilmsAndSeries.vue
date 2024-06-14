@@ -11,8 +11,10 @@
                 :disabled="activeIndex == model.id" class="btn btn-primary">{{ model.name }}</button>
         </template>
         <template v-slot:model-grid>
-            <button class="btn btn-primary" @click="createModel">Создать <img src="@/static/icons/plus.svg"
-                    alt="создать"></button>
+            <div class="input-group">
+                <button class="btn btn-primary" @click="createModel">Создать <img src="@/static/icons/plus.svg"
+                        alt="создать"></button>
+            </div>
             <div class="model-grid" v-if="activeIndex == 0">
                 <ModelCard v-for="model in modelObjects" :key="model.id" :objectid="model.id"
                     @click="$router.push({ name: 'edit-media', params: { id: model.id, media: 'series' } })">
@@ -29,7 +31,7 @@
             </div>
             <div class="model-grid" v-if="activeIndex == 1">
                 <ModelCard v-for="model in modelObjects" :key="model.id" :objectid="model.id"
-                    @click="$router.push({ name: 'edit-media', params: { id: model.id, media: 'movie' } })">
+                    @click="$router.push({ name: 'edit-media', params: { id: model.id, media: 'film' } })">
                     <template #card-title><img :src="model.previewImageURL" alt="">
                         <p>{{ model.title }}</p>
                     </template>
@@ -78,7 +80,8 @@
             </div>
         </template>
         <template #model-pagination>
-            <SearchPaginator :modelValue="currentPage" :page_first="page_first" :page_last="page_last" />
+            <SearchPaginator :modelValue="currentPage" :page_first="page_first" :page_last="page_last"
+                @update:model-value="changePage" />
         </template>
     </ViewModels>
 </template>
@@ -94,6 +97,7 @@ import { convertDirectors, getDirectors } from '../../../api/get/get_directors';
 import ModelCard from '../templates/ModelCard.vue';
 import router from '@/router';
 import { convertGenres, getGenres } from '@/api/get/get_genres';
+import { getLastPage } from '@/helpers/get_last_page';
 
 let models = [
     {
@@ -135,14 +139,21 @@ function getLocalDate(date: Date | undefined) {
 
 async function switchIndex(index: number) {
     activeIndex.value = index;
+    currentPage.value = 1;
     await search();
 }
 
+async function changePage(page: number) {
+    currentPage.value = page;
+    await search();
+}
 function createModel() {
     switch (activeIndex.value) {
         case 0:
+            router.push({ name: 'create-media', params: { media: 'series' } });
+            break;
         case 1:
-            router.push({ name: 'create-media' });
+            router.push({ name: 'create-media', params: { media: 'film' } });
             break;
         case 2:
             router.push({ name: 'create-actor' });
@@ -191,6 +202,9 @@ async function search() {
     }
     catch {
         console.log(res.error);
+    }
+    finally {
+        page_last.value = getLastPage(res.totalCount ?? 0, pageSize);
     }
 }
 </script>

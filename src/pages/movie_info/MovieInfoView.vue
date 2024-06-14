@@ -25,7 +25,7 @@
                 <p class="body-lg">Режиссер: {{ movie.director!.name }}</p>
                 <h3 class="title-md">Описание</h3>
                 <p class="body-lg description">{{ movie.description }}</p>
-                <p v-if="movie.seasons" class="body-lg">Количество сезонов: {{ movie.seasons }}</p>
+                <p v-if="movie.seasons" class="body-lg">Количество сезонов: {{ movie.seasons.length }}</p>
             </div>
             <div class="movie-actors">
                 <h3 class="title-md">Актерский состав</h3>
